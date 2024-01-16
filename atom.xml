@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2023-12-22T07:39:03.196Z</updated>
+  <updated>2024-01-16T05:30:30.724Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【vivado】VIO和ILA联合调试小技巧</title>
+    <link href="https://planckzgh.github.io/2024/01/16/%E3%80%90vivado%E3%80%91VIO%E5%92%8CILA%E8%81%94%E5%90%88%E8%B0%83%E8%AF%95%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>https://planckzgh.github.io/2024/01/16/%E3%80%90vivado%E3%80%91VIO%E5%92%8CILA%E8%81%94%E5%90%88%E8%B0%83%E8%AF%95%E5%B0%8F%E6%8A%80%E5%B7%A7/</id>
+    <published>2024-01-16T05:18:37.000Z</published>
+    <updated>2024-01-16T05:30:30.724Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Vivado中VIO-IP核的使用"><a href="#Vivado中VIO-IP核的使用" class="headerlink" title="Vivado中VIO IP核的使用"></a>Vivado中VIO IP核的使用</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>相对于ILA更多的关注波形，VIO则专注于输入和输出关系的描述。个人理解为VIO就是一个便携测试，可以根据输入测试输出。类似于开关和LED仿真，相当于在数字电路中加入LED（输入）和开关(输出）。</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><img src="/imgs/a81b8328e37470507dcf6ae884e1c089.png" alt="a81b8328e37470507dcf6ae884e1c089.png"><br><img src="/imgs/77b7044ded3c4b5c928b31b28c6f51ce_16246caaad564a55b.png" alt="067d7b172dfa4bc9919a5355c99a66c3.png"><br><img src="/imgs/0ef05f246dc84095b29c22cd6d9d8edb_e1b1f43df33d44b08.png" alt="f03fc80e2b2f4b029e2bbe7dd9fabfb8.png"><br><img src="/imgs/5fef9da18d43478dab4ec902f7c1d533_340bf3662d634a8e8.png" alt="9f39c66459724763abfad713cf80d5b9.png">  </p><h2 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h2><p><img src="/imgs/612334be62f5812c20c374b7f83ef9d3.png" alt="612334be62f5812c20c374b7f83ef9d3.png"><br><img src="/imgs/134db90ff14790def0b904d983b3259e.png" alt="134db90ff14790def0b904d983b3259e.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Vivado中VIO-IP核的使用&quot;&gt;&lt;a href=&quot;#Vivado中VIO-IP核的使用&quot; class=&quot;headerlink&quot; title=&quot;Vivado中VIO IP核的使用&quot;&gt;&lt;/a&gt;Vivado中VIO IP核的使用&lt;/h1&gt;&lt;h2 id=&quot;理解&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://planckzgh.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>IC设计基础知识</title>
