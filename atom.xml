@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2024-01-16T05:30:30.724Z</updated>
+  <updated>2024-01-29T16:42:34.954Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>这是一个测试</title>
+    <link href="https://planckzgh.github.io/2024/01/30/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95/"/>
+    <id>https://planckzgh.github.io/2024/01/30/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95/</id>
+    <published>2024-01-29T16:41:51.000Z</published>
+    <updated>2024-01-29T16:42:34.954Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一个测试！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;这是一个测试！&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>【vivado】VIO和ILA联合调试小技巧</title>
