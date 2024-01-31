@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2024-01-29T16:42:34.954Z</updated>
+  <updated>2024-01-31T05:42:12.735Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vimium简明教程</title>
+    <link href="https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"/>
+    <id>https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</id>
+    <published>2024-01-31T04:57:15.000Z</published>
+    <updated>2024-01-31T05:42:12.735Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Vimium简明教程"><a href="#Vimium简明教程" class="headerlink" title="Vimium简明教程"></a>Vimium简明教程</h1><h2 id="0-Show-help"><a href="#0-Show-help" class="headerlink" title="0. ? Show help"></a>0. ? Show help</h2><h2 id="1-滚动跳转-j-k-d-u-h-l-gg-G-zH-zL"><a href="#1-滚动跳转-j-k-d-u-h-l-gg-G-zH-zL" class="headerlink" title="1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL"></a>1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL</h2><ul><li>j   Scroll down</li><li>k   Scroll up</li><li>dScroll a half page down</li><li>uScroll a half page up</li><li>hScroll left</li><li>lScroll right</li><li>ggScroll to the top of the page</li><li>GScroll to the bottom of the page</li><li>zHScroll all the way to the left</li><li>zLScroll all the way to the right</li><li>mCreate a new mark</li><li>`Go to a mark</li></ul><h2 id="2-刷新页面：r-x-X"><a href="#2-刷新页面：r-x-X" class="headerlink" title="2. 刷新页面：r,x,X"></a>2. 刷新页面：r,x,X</h2><ul><li>r   Reload the page</li><li>xClose current tab</li><li>XRestore closed tab</li></ul><h2 id="3-创建页面：p-P-gu-gU-ge-gE-t-yt"><a href="#3-创建页面：p-P-gu-gU-ge-gE-t-yt" class="headerlink" title="3. 创建页面：p,P,gu,gU,ge,gE,t,yt"></a>3. 创建页面：p,P,gu,gU,ge,gE,t,yt</h2><ul><li>pOpen the clipboard’s URL in the current tab</li><li>POpen the clipboard’s URL in a new tab</li><li>guGo up the URL hierarchy</li><li>gUGo to root of current URL hierarchy</li><li>geEdit the current URL</li><li>gEEdit the current URL and open in a new tab</li><li>tCreate new tab</li><li>ytDuplicate current tab</li></ul><h2 id="4-点击链接：f-F"><a href="#4-点击链接：f-F" class="headerlink" title="4. 点击链接：f,F"></a>4. 点击链接：f,F</h2><ul><li>fOpen a link in the current tab</li><li>FOpen a link in a new tab</li></ul><h2 id="5-复制内容：yy-yf-v-V"><a href="#5-复制内容：yy-yf-v-V" class="headerlink" title="5. 复制内容：yy,yf,v,V"></a>5. 复制内容：yy,yf,v,V</h2><ul><li>yyCopy the current URL to the clipboard</li><li>yfCopy a link URL to the clipboard</li><li>vEnter visual mode</li><li>VEnter visual line mode</li></ul><h2 id="6-搜索内容：-n-N-o-O-b-B-T"><a href="#6-搜索内容：-n-N-o-O-b-B-T" class="headerlink" title="6. 搜索内容：&#x2F;,n,N,o,O,b,B,T"></a>6. 搜索内容：&#x2F;,n,N,o,O,b,B,T</h2><ul><li>&#x2F;Enter find mode</li><li>nCycle forward to the next find match</li><li>NCycle backward to the previous find match</li><li>oOpen URL, bookmark or history entry</li><li>OOpen URL, bookmark or history entry in a new tab</li><li>bOpen a bookmark</li><li>BOpen a bookmark in a new tab</li><li>TSearch through your open tabs</li></ul><h2 id="7-切换页面：J-K-g0-g-H-L"><a href="#7-切换页面：J-K-g0-g-H-L" class="headerlink" title="7. 切换页面：J,K,^,g0,g$,H,L"></a>7. 切换页面：J,K,^,g0,g$,H,L</h2><ul><li>J, Go one tab left</li><li>K, Go one tab right</li><li>^Go to previously-visited tab</li><li>g0Go to the first tab</li><li>g$Go to the last tab</li><li>HGo back in history</li><li>LGo forward in history</li></ul><h2 id="8-移动页面：W"><a href="#8-移动页面：W" class="headerlink" title="8. 移动页面：W,&lt;&lt;,&gt;&gt;"></a>8. 移动页面：W,&lt;&lt;,&gt;&gt;</h2><ul><li>W  Move tab to new window</li><li>&lt;&lt;Move tab to the left</li><li>&gt;&gt;Move tab to the right</li></ul><h2 id="9-其他操作："><a href="#9-其他操作：" class="headerlink" title="9. 其他操作："></a>9. 其他操作：</h2><ul><li>&lt;alt-p&gt;Pin or unpin current tab</li><li>&lt;alt-m&gt;Mute or unmute current tab</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Vimium简明教程&quot;&gt;&lt;a href=&quot;#Vimium简明教程&quot; class=&quot;headerlink&quot; title=&quot;Vimium简明教程&quot;&gt;&lt;/a&gt;Vimium简明教程&lt;/h1&gt;&lt;h2 id=&quot;0-Show-help&quot;&gt;&lt;a href=&quot;#0-Show-hel</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://planckzgh.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>这是一个测试</title>
