@@ -1,0 +1,582 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ROIC项目电路设计与调试 | planckgh</title><meta name="author" content="planckgh,planckgh@gmail.com"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ROIC项目电路设计与调试设计部分软件设计FPGA开发代码框架 数据接收与解串像素顺序的调整 方案一：高速时钟输出 123456789101112131415161718192021&#123;signal: [  [&#x27;wr: 25.6us&#x27;,  &#123;name: &#x27;DCO:60MHz&#x27;, wave: &#x27;l...pp|ppp|ppp|ppp|">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROIC项目电路设计与调试">
+<meta property="og:url" content="https://planckzgh.github.io/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="ROIC项目电路设计与调试设计部分软件设计FPGA开发代码框架 数据接收与解串像素顺序的调整 方案一：高速时钟输出 123456789101112131415161718192021&#123;signal: [  [&#x27;wr: 25.6us&#x27;,  &#123;name: &#x27;DCO:60MHz&#x27;, wave: &#x27;l...pp|ppp|ppp|ppp|">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://planckzgh.github.io/img/bg1.jpg">
+<meta property="article:published_time" content="2024-01-31T14:40:07.000Z">
+<meta property="article:modified_time" content="2024-01-31T15:48:57.552Z">
+<meta property="article:author" content="planckgh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://planckzgh.github.io/img/bg1.jpg"><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":500,"languages":{"author":"作者: planckgh","link":"链接: ","source":"来源: planckgh","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ROIC项目电路设计与调试',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-31 23:48:57'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/Planck.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/bg1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="planckgh"><img class="site-icon" src="/img/Planck.jpeg"/><span class="site-name">planckgh</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ROIC项目电路设计与调试<a class="post-edit-link" href="https://github.com/planckzgh/planckzgh.github.io/tree/main_posts/ROIC项目电路设计与调试.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-31T14:40:07.000Z" title="发表于 2024-01-31 22:40:07">2024-01-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-31T15:48:57.552Z" title="更新于 2024-01-31 23:48:57">2024-01-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ROIC项目电路设计与调试"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="ROIC项目电路设计与调试"><a href="#ROIC项目电路设计与调试" class="headerlink" title="ROIC项目电路设计与调试"></a>ROIC项目电路设计与调试</h1><h2 id="设计部分"><a href="#设计部分" class="headerlink" title="设计部分"></a>设计部分</h2><h3 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h3><h4 id="FPGA开发"><a href="#FPGA开发" class="headerlink" title="FPGA开发"></a>FPGA开发</h4><h5 id="代码框架"><a href="#代码框架" class="headerlink" title="代码框架"></a>代码框架</h5><p><img src="/:/667ea02e5a9648e89431f6d19eba1d43" alt="CodeStructure.png"></p>
+<h5 id="数据接收与解串"><a href="#数据接收与解串" class="headerlink" title="数据接收与解串"></a>数据接收与解串</h5><h5 id="像素顺序的调整"><a href="#像素顺序的调整" class="headerlink" title="像素顺序的调整"></a>像素顺序的调整</h5><ol>
+<li><p>方案一：高速时钟输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;signal: [</span><br><span class="line">  [&#x27;wr: 25.6us&#x27;,</span><br><span class="line">  &#123;name: &#x27;DCO:60MHz&#x27;, wave: &#x27;l...pp|ppp|ppp|ppp|ppp|ppp|ppp|ppp|p&#x27;&#125;,</span><br><span class="line">  &#123;name: &#x27;FR:5MHz&#x27;, wave: &#x27;lppppp|pp&#x27;,period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch1&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;1  &#x27;,&#x27;2  &#x27;,&#x27;3  &#x27;,&#x27;4  &#x27;,&#x27;&#x27;,&#x27;127&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch2&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;128&#x27;,&#x27;129&#x27;,&#x27;130&#x27;,&#x27;131&#x27;,&#x27;&#x27;,&#x27;256&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch3&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;257&#x27;,&#x27;258&#x27;,&#x27;259&#x27;,&#x27;260&#x27;,&#x27;&#x27;,&#x27;384&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch4&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;385&#x27;,&#x27;386&#x27;,&#x27;387&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;512&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;EOC&#x27;, wave: &#x27;lh......l&#x27;, period: 4&#125;,</span><br><span class="line">  ],</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  [&#x27;rd: 2us&#x27;,</span><br><span class="line">  &#123;name: &#x27;EOC&#x27;, wave: &#x27;hl......h&#x27;, period: 4&#125;,</span><br><span class="line">  &#123;name: &#x27;row_clk:323MHz&#x27;,   wave: &#x27;l...ppppp|ppppp|ppppp|ppppp|pppppppp&#x27;,period:1&#125;,</span><br><span class="line">  &#123;name: &#x27;row_pixel&#x27;, wave: &#x27;xxxx22222|22222|22222|22222|2222xxxx&#x27;,data:[&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;&#x27;,&#x27;128&#x27;,&#x27;129&#x27;,&#x27;130&#x27;,&#x27;131&#x27;,&#x27;&#x27;,&#x27;257&#x27;,&#x27;258&#x27;,&#x27;259&#x27;,&#x27;260&#x27;,&#x27;&#x27;,&#x27;385&#x27;,&#x27;386&#x27;,&#x27;387&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;512&#x27;]&#125;,</span><br><span class="line">  ]</span><br><span class="line">],</span><br><span class="line"> config:&#123;hscale: 1&#125;,</span><br><span class="line"> head  :&#123;text: &#x27;方案一&#x27;,  tick: -3, every: 1&#125;,</span><br><span class="line"> foot  :&#123;text: &#x27;图 1: 在EOC高电平时写入数据到双口RAM，在EOC低电平时从双口RAM读取数据。&#x27;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方案二：直接输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;signal: [</span><br><span class="line">  &#123;name: &#x27;DCO:60MHz&#x27;, wave: &#x27;l...pp|ppp|ppp|ppp|ppp|ppp|ppp|ppp|p&#x27;&#125;,</span><br><span class="line">  &#123;name: &#x27;pix_clk:5MHz&#x27;, wave: &#x27;lPPPPP|pp&#x27;,period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch1&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;1  &#x27;,&#x27;2  &#x27;,&#x27;3  &#x27;,&#x27;4  &#x27;,&#x27;&#x27;,&#x27;128&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch2&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;129&#x27;,&#x27;130&#x27;,&#x27;131&#x27;,&#x27;132&#x27;,&#x27;&#x27;,&#x27;256&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch3&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;257&#x27;,&#x27;258&#x27;,&#x27;259&#x27;,&#x27;260&#x27;,&#x27;&#x27;,&#x27;384&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;ch4&#x27;,      wave: &#x27;x22222|2x&#x27;,data: [&#x27;385&#x27;,&#x27;386&#x27;,&#x27;387&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;512&#x27;],period:4&#125;,</span><br><span class="line">  &#123;name: &#x27;EOC&#x27;, wave: &#x27;lh......l&#x27;, period: 4&#125;,</span><br><span class="line">  &#123;name: &#x27;pixs_valid&#x27;, wave: &#x27;l.h......&#x27;, period: 4&#125;,</span><br><span class="line">  &#123;name: &#x27;pixs_clk:20MHz&#x27;,   wave: &#x27;l...ppppppppppppppppppppppppppp|pppp&#x27;,period:1&#125;,</span><br><span class="line">  &#123;name: &#x27;o_pixels&#x27;, wave: &#x27;xxxxxxxx22222222222222222222222|2222&#x27;,data:[&#x27;1&#x27;,&#x27;129&#x27;,&#x27;257&#x27;,&#x27;385&#x27;,&#x27;2&#x27;,&#x27;130&#x27;,&#x27;258&#x27;,&#x27;386&#x27;,&#x27;3&#x27;,&#x27;131&#x27;,&#x27;259&#x27;,&#x27;387&#x27;,&#x27;4&#x27;,&#x27;132&#x27;,&#x27;260&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;128&#x27;,&#x27;256&#x27;,&#x27;384&#x27;,&#x27;512&#x27;]&#125;,</span><br><span class="line">],</span><br><span class="line"> config:&#123;hscale: 1&#125;,</span><br><span class="line"> head  :&#123;text: &#x27;方案二&#x27;,  tick: -3, every: 1&#125;,</span><br><span class="line"> foot  :&#123;text: &#x27;&#x27;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方案三：RAM转存顺序输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;signal: [</span><br><span class="line">   &#123;name: &#x27;DCO:60MHz&#x27;, wave: &#x27;l...pp|ppp|ppp|ppp|ppp|ppp|ppp|ppp|p&#x27;&#125;,</span><br><span class="line">  [&#x27;1st stage&#x27;,</span><br><span class="line">    &#123;name: &#x27;pix_clk:5MHz&#x27;, wave: &#x27;lPPPPP|pp&#x27;,period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;EOC&#x27;, wave: &#x27;lh......l&#x27;, period: 4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch1&#x27;,      wave: &#x27;x33333|3x&#x27;,data: [&#x27;p1  &#x27;,&#x27;p2  &#x27;,&#x27;p3  &#x27;,&#x27;p4  &#x27;,&#x27;&#x27;,&#x27;p128&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch2&#x27;,      wave: &#x27;x33333|3x&#x27;,data: [&#x27;p129&#x27;,&#x27;p130&#x27;,&#x27;p131&#x27;,&#x27;p132&#x27;,&#x27;&#x27;,&#x27;p256&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch3&#x27;,      wave: &#x27;x33333|3x&#x27;,data: [&#x27;p257&#x27;,&#x27;p258&#x27;,&#x27;p259&#x27;,&#x27;p260&#x27;,&#x27;&#x27;,&#x27;p384&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch4&#x27;,      wave: &#x27;x33333|3x&#x27;,data: [&#x27;p385&#x27;,&#x27;p386&#x27;,&#x27;p387&#x27;,&#x27;p388&#x27;,&#x27;&#x27;,&#x27;p512&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;wr_clk:20MHz&#x27;,   wave: &#x27;l...ppppppppppppppppppppppppppp|pppp&#x27;,period:1&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM1:1KB&#x27;,  wave: &#x27;xxxxxxxx33333333333333333333333|3333&#x27;,data:[&#x27;p1&#x27;,&#x27;p129&#x27;,&#x27;p257&#x27;,&#x27;p385&#x27;,&#x27;p2&#x27;,&#x27;p130&#x27;,&#x27;p258&#x27;,&#x27;p386&#x27;,&#x27;p3&#x27;,&#x27;p131&#x27;,&#x27;p259&#x27;,&#x27;p387&#x27;,&#x27;p4&#x27;,&#x27;p132&#x27;,&#x27;p260&#x27;,&#x27;p388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;p128&#x27;,&#x27;p256&#x27;,&#x27;p384&#x27;,&#x27;p512&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM1:addr&#x27;, wave: &#x27;xxxxxxxx22222222222222222222222|2222&#x27;,data:[&#x27;1&#x27;,&#x27;129&#x27;,&#x27;257&#x27;,&#x27;385&#x27;,&#x27;2&#x27;,&#x27;130&#x27;,&#x27;258&#x27;,&#x27;386&#x27;,&#x27;3&#x27;,&#x27;131&#x27;,&#x27;259&#x27;,&#x27;387&#x27;,&#x27;4&#x27;,&#x27;132&#x27;,&#x27;260&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;128&#x27;,&#x27;256&#x27;,&#x27;384&#x27;,&#x27;512&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM2:1KB&#x27;,  wave: &#x27;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|3333&#x27;,data:[&#x27;p1-&#x27;,&#x27;p2-&#x27;,&#x27;p3-&#x27;,&#x27;p4-&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM2:addr&#x27;, wave: &#x27;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|2222&#x27;,data:[&#x27;1-128&#x27;,&#x27;129-256&#x27;,&#x27;257-384&#x27;,&#x27;385-512&#x27;]&#125;,</span><br><span class="line">   ],</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  [&#x27;2nd stage&#x27;, </span><br><span class="line">    &#123;name: &#x27;pixs_valid&#x27;, wave: &#x27;lh......l&#x27;, period: 4&#125;,</span><br><span class="line">    &#123;name: &#x27;pixs_clk:20MHz&#x27;,   wave: &#x27;l...ppppppppppppppppppppppp|ppppl...&#x27;,period:1&#125;,</span><br><span class="line">    &#123;name: &#x27;o_pixels:FIFO&#x27;,  wave: &#x27;xxxx33333|3333|............|3333xxxx&#x27;,data:[&#x27;p1&#x27;,&#x27;p2&#x27;,&#x27;p3&#x27;,&#x27;p4&#x27;,&#x27;&#x27;,&#x27;p128&#x27;,&#x27;p129&#x27;,&#x27;p130&#x27;,&#x27;&#x27;,&#x27;p509&#x27;,&#x27;p510&#x27;,&#x27;p511&#x27;,&#x27;p512&#x27;]&#125;,</span><br><span class="line">    &#123;&#125;, </span><br><span class="line">    &#123;name: &#x27;pix_clk:5MHz&#x27;, wave: &#x27;lPPPPP|pp&#x27;,period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;EOC&#x27;, wave: &#x27;lh......l&#x27;, period: 4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch1&#x27;,      wave: &#x27;x44444|4x&#x27;,data: [&#x27;q1  &#x27;,&#x27;q2  &#x27;,&#x27;q3  &#x27;,&#x27;q4  &#x27;,&#x27;&#x27;,&#x27;q128&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch2&#x27;,      wave: &#x27;x44444|4x&#x27;,data: [&#x27;q129&#x27;,&#x27;q130&#x27;,&#x27;q131&#x27;,&#x27;q132&#x27;,&#x27;&#x27;,&#x27;q256&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch3&#x27;,      wave: &#x27;x44444|4x&#x27;,data: [&#x27;q257&#x27;,&#x27;q258&#x27;,&#x27;q259&#x27;,&#x27;q260&#x27;,&#x27;&#x27;,&#x27;q384&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;ch4&#x27;,      wave: &#x27;x44444|4x&#x27;,data: [&#x27;q385&#x27;,&#x27;q386&#x27;,&#x27;q387&#x27;,&#x27;q388&#x27;,&#x27;&#x27;,&#x27;q512&#x27;],period:4&#125;,</span><br><span class="line">    &#123;name: &#x27;wr_clk:20MHz&#x27;,   wave: &#x27;l.......ppppppppppppppppppppppp|pppp&#x27;,period:1&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM1:1KB&#x27;,  wave: &#x27;xxxxxxxx44444444444444444444444|4444&#x27;,data:[&#x27;q1&#x27;,&#x27;q129&#x27;,&#x27;q257&#x27;,&#x27;q385&#x27;,&#x27;q2&#x27;,&#x27;q130&#x27;,&#x27;q258&#x27;,&#x27;q386&#x27;,&#x27;q3&#x27;,&#x27;q131&#x27;,&#x27;q259&#x27;,&#x27;q387&#x27;,&#x27;q4&#x27;,&#x27;q132&#x27;,&#x27;q260&#x27;,&#x27;q388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;q128&#x27;,&#x27;q256&#x27;,&#x27;q384&#x27;,&#x27;q512&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM1:addr&#x27;, wave: &#x27;xxxxxxxx22222222222222222222222|2222&#x27;,data:[&#x27;1&#x27;,&#x27;129&#x27;,&#x27;257&#x27;,&#x27;385&#x27;,&#x27;2&#x27;,&#x27;130&#x27;,&#x27;258&#x27;,&#x27;386&#x27;,&#x27;3&#x27;,&#x27;131&#x27;,&#x27;259&#x27;,&#x27;387&#x27;,&#x27;4&#x27;,&#x27;132&#x27;,&#x27;260&#x27;,&#x27;388&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;128&#x27;,&#x27;256&#x27;,&#x27;384&#x27;,&#x27;512&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM2:1KB&#x27;,  wave: &#x27;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|4444&#x27;,data:[&#x27;q1-&#x27;,&#x27;q2-&#x27;,&#x27;q3-&#x27;,&#x27;q4-&#x27;]&#125;,</span><br><span class="line">    &#123;name: &#x27;RAM2:addr&#x27;, wave: &#x27;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|2222&#x27;,data:[&#x27;1-128&#x27;,&#x27;129-256&#x27;,&#x27;257-384&#x27;,&#x27;385-512&#x27;]&#125;,</span><br><span class="line">   </span><br><span class="line">  ],</span><br><span class="line">],</span><br><span class="line"> config:&#123;hscale: 1&#125;,</span><br><span class="line">   head  :&#123;text: &#x27;方案三&#x27;,  tick: -3, every: 1&#125;,</span><br><span class="line">   foot  :&#123;text: &#x27;FIG1：EOC高读取像素存入RAM1中，EOC低时转存RAM2（2us内）；第一阶段完成后第二阶段将第一阶段的像素按顺序写入fifo；注意：RAM1的写入位宽12，读取位宽384；RAM2的写入位宽384，读取位宽12&#x27;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="固件设计"><a href="#固件设计" class="headerlink" title="固件设计"></a>固件设计</h4><h5 id="slavefifo的配置"><a href="#slavefifo的配置" class="headerlink" title="slavefifo的配置"></a>slavefifo的配置</h5><h3 id="硬件设计"><a href="#硬件设计" class="headerlink" title="硬件设计"></a>硬件设计</h3><h5 id="数字信号处理板"><a href="#数字信号处理板" class="headerlink" title="数字信号处理板"></a>数字信号处理板</h5><h5 id="模拟信号处理板"><a href="#模拟信号处理板" class="headerlink" title="模拟信号处理板"></a>模拟信号处理板</h5><h2 id="调试部分"><a href="#调试部分" class="headerlink" title="调试部分"></a>调试部分</h2><h3 id="软件问题"><a href="#软件问题" class="headerlink" title="软件问题"></a>软件问题</h3><ol>
+<li><p>时序不收敛或时序的critical warning</p>
+<blockquote>
+<p>问题原因与解决方案：</p>
+<ol>
+<li>做好信号的跨时钟域处理</li>
+<li>ILA的采样时钟与信号的时钟域不一致</li>
+<li>set false path</li>
+</ol>
+</blockquote>
+</li>
+<li><p>USB的FIFO FLAG FULL在FIFO reset之后写四行拉高（FIFO满），设置AUTOPACKETLEN&#x3D;512，但是USB为何不将数据转移至SIE中；</p>
+<blockquote>
+<p>问题原因与解决方案：<br>暂无</p>
+</blockquote>
+</li>
+<li><p>ILA抓取信号注意：</p>
+<blockquote>
+<ol>
+<li>二倍采样定律</li>
+<li>由于ILA生成时间较长，尽量采用一次生成多次例化的方式；抓取多个单比特信号可采用位拼接的方式使用多位宽探针探测</li>
+</ol>
+</blockquote>
+</li>
+<li><p>Sensor的FSYNC和EOC没有正常拉高</p>
+<blockquote>
+<p>问题原因与解决方案：</p>
+<ol>
+<li>FPGA板存在问题，突出两套板对照调试的好处</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<h3 id="硬件问题"><a href="#硬件问题" class="headerlink" title="硬件问题"></a>硬件问题</h3><ol>
+<li><p>LM1117输出的电压不对且无论如何调整保持不变（异常现象），且会拉低微机电源的输出电压（不存在功耗不够的问题）</p>
+<blockquote>
+<p>问题原因与解决方案：</p>
+<ol>
+<li>LM1117的焊盘画反了；导致芯片内部的稳压引脚拉低了电源的输出电压；<br>总结：排除一切不可能，最后的那个就是原因</li>
+</ol>
+</blockquote>
+</li>
+<li><p>USB设备无法识别</p>
+<blockquote>
+<p>问题原因与解决方案：</p>
+<ol>
+<li>STFW寻求解决方案</li>
+<li>第一次由于AVCC和VCC通过磁珠连接，导致USB设备无法识别；去掉磁珠改成直连可解决该问题；</li>
+<li>第二次由于Type-C插座存在焊接问题；重新更换焊接该插口可解决该问题；</li>
+<li>第三次由于EEPROM芯片因焊盘画反而人为损坏；取消EEPROM可排除此问题。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>EA3059电压输出不正确</p>
+<blockquote>
+<p>问题原因与解决方案：</p>
+<ol>
+<li>EA3059错买成了EA3059C，EA3059C只有三路正常输出；</li>
+<li>EA3059电压输出端有一颗22uF的大电容被错认为是滤波电容；因封装不当为引起注意就以3.3uF的小电容代替导致电压输出不正确；<br>总结：应当完全按照手册进行设计，实际焊接时，对于受实际情况限制存在误焊接的元器件应当立即予以标注，便于后期调试；</li>
+</ol>
+</blockquote>
+</li>
+<li><p>Sensor会拉低COM（有DAC配置给出）电压</p>
+<blockquote>
+<p>问题原因与解决方案：<br>Sensor存在问题，更换Sensor后正常;</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h3 id="1-2-细节思考"><a href="#1-2-细节思考" class="headerlink" title="1.2 细节思考"></a>1.2 细节思考</h3><ul>
+<li><p>lvds的本质是差分对，有利于更高频率的数据传输，但是更高频率的数据传输往往带来一个更小的时序裕度，这对于路由有更高的要求。如果放宽PCB路由限制，lvds数据会带来数据位相对位移问题（deskew），因此，需要在高频的lvds数据帧的帧头和帧尾会插入同步码，利用去偏移算法进行位对齐（bitslip）。</p>
+</li>
+<li><p>可是这一切都建立在更高频的数据传输速率上，对于ROIC项目，数据传输速率位5MHz，双倍采样后也不过10MHz，对于这种低频速率，PCB路由造成的影响不大，可以直接简单的进行lvds差分转单端，根据FR和DCO信号处理数据。</p>
+</li>
+<li><p>情况有变，我们的模拟量是5MHz，但是数据位时钟是50MHz以上，二倍采样能达到100MHz以上。我感觉就模拟量时钟而言，IMX990也不过如此。可能就几十兆左右。</p>
+</li>
+<li><p>也就是说，还得做lvds位对齐和数据解串。但是这里我们有FR信号，是否意味着与传统方式有变化，在FR上升沿开始一次12bit的数据传输，倘若出现位偏移，</p>
+</li>
+<li><p>现在的情况是，ADC提供一个数据输出测试Pattern，可以指定数据输出，需要知道是否只需要进行一次位对齐处理即可，按常理说应该是只需要在上电后进行一次位对齐处理就可以了。</p>
+</li>
+<li><p>延迟部分，解串部分，位对齐部分（关键是去偏移算法和tap的动态计算）所以延迟tap是关键，延迟原语，延迟模式，去偏移算法等等。</p>
+</li>
+<li><p>另外还有解串1：6，1：4，1：8都是什么含义，输入输出如何？<br>看解串器原语，确定位宽对输入输出的影响。以及各个原语的输入输出参数联系。</p>
+</li>
+<li><p>关键是ug471</p>
+</li>
+<li><p>真正对于该项目，实际上不需要相位纠偏，因为时延很小。只需要进行数据接串即可，甚至不需要延时原语。直接进入数据解串。或者说，甚至直接进行差分转单端之后的数据采样。</p>
+</li>
+<li><p>还有就是一定可以应用参考样例的。</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+下午打通USB2.0部分；</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-硬件部分"><a href="#2-硬件部分" class="headerlink" title="2 硬件部分"></a>2 硬件部分</h2><h3 id="2-1-进展"><a href="#2-1-进展" class="headerlink" title="2.1 进展"></a>2.1 进展</h3><ul>
+<li><input checked="" disabled="" type="checkbox"> 学习原理图绘制软件Cadence</li>
+<li><input checked="" disabled="" type="checkbox"> 学习ROIC项目原理图（信号流向，原理图设计，数据手册）</li>
+<li><input checked="" disabled="" type="checkbox"> 学习IMX990fpga板原理图</li>
+<li><input checked="" disabled="" type="checkbox"> 重新绘制电源板和ADC板</li>
+<li><input checked="" disabled="" type="checkbox"> 设计FPGA信号处理板</li>
+<li><input checked="" disabled="" type="checkbox"> 使用USB2.0模块（或设计该模块）</li>
+<li><input checked="" disabled="" type="checkbox"> 评估每一块板的原理图</li>
+<li><input checked="" disabled="" type="checkbox"> 发给贾叔绘制PCB</li>
+<li><input checked="" disabled="" type="checkbox"> 制板</li>
+</ul>
+<h3 id="2-2-问题"><a href="#2-2-问题" class="headerlink" title="2.2 问题"></a>2.2 问题</h3><h4 id="2023-07-14-09-51"><a href="#2023-07-14-09-51" class="headerlink" title="2023.07.14 09:51"></a>2023.07.14 09:51</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> <ol>
+<li>四路差分数字信号是如何转成lvds标准的？</li>
+</ol>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <ol start="2">
+<li>我看到你们已经画好了电源板和ADC板合并的原理图，你们是希望我们能做FPGA的信号处理板和USB传输板吗？</li>
+</ol>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <ol start="3">
+<li>电源板为你们的sensor提供的上电时序是什么？</li>
+</ol>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <ol start="4">
+<li>问曾老师：芯片供电板和ADC板能否合并呢？</li>
+</ol>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <ol start="5">
+<li>我打算用Cadence画，你们有原理图库和封装库吗，毕竟你们之前划过，最好是能提供封装库，到时候肯定是你们采购这些元器件。（用什么画要跟贾叔先沟通好）</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>PCB，重新全部做，原件排布，板子尺寸，预留接口，供电等等可以删掉一部分（原理图仅供参考）<br>ADC的放大器没跑通（差分运放LTC6419有问题，没定位）<br>AD的输出本身就是lvds协议的，AD配置0206，工作在某种模式，输出是A+A-；<br>小载板如有尺寸要求边区可适当变小<br>FPGA控制信号时序，对电源没有时序要求</p>
+</blockquote>
+<h4 id="2023-10-08-10-52"><a href="#2023-10-08-10-52" class="headerlink" title="2023.10.08 10:52"></a>2023.10.08 10:52</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> FPGA重新选型(原因：BGA封装不好手工焊接，贴片成本过高)<ul>
+<li><input checked="" disabled="" type="checkbox"> 确定FPGA厂商：国产高云FPGA情况调研；</li>
+<li><input checked="" disabled="" type="checkbox"> 确定芯片系列：中低端，成本控制，供货情况；</li>
+<li><input checked="" disabled="" type="checkbox"> 列出选型进行对比（LUT，PLL，CLKRate，footprint，bRAM）</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>FPGA</th>
+<th>LUT</th>
+<th>PLL</th>
+<th>FF</th>
+<th>BRAM</th>
+<th>CLK</th>
+<th>IO</th>
+<th>Footprint</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>minimize</td>
+<td>2000</td>
+<td>4</td>
+<td>2000</td>
+<td>5</td>
+<td>300MHz</td>
+<td>90</td>
+<td>manual weld</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<ul>
+<li>几种方案：<ul>
+<li>买赛灵思核心板</li>
+<li>更换为国产高云FPGA</li>
+<li>购买国产的高云FPGA试水</li>
+<li>手工焊接BGA（有没有仪器可借用）</li>
+</ul>
+</li>
+</ul>
+<p>bga可以，</p>
+<h3 id="2-3-模拟信号处理板"><a href="#2-3-模拟信号处理板" class="headerlink" title="2.3 模拟信号处理板"></a>2.3 模拟信号处理板</h3><h4 id="2-3-1-电源板"><a href="#2-3-1-电源板" class="headerlink" title="2.3.1 电源板"></a>2.3.1 电源板</h4><h5 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h5><ol>
+<li>齐纳二极管的替代品：TL431系列<br><img src="/:/58041be1edf340109db517c5cd4e0c6d" alt="f29401cad84f3ff3c6ff8d7dc17a5857.png"><br><img src="/:/ede5fc5f25524c8c85de9197c6a8d64a" alt="b108cf799c54b675e7b2f4c5f54efae8.png"></li>
+</ol>
+<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><ol>
+<li>LM324放大器部分，对VR和VRST进行微调，放大倍数不对，输入电压不对（同相输入端应该改成0.3V和1.4V的输入电压）<br>反馈电阻和接地电阻的阻值比应改为：$\frac{R_f}{R_g}&#x3D;\frac{1.5}{1.4},\frac{0.4}{0.3}&#x3D;0.07,0.33$</li>
+</ol>
+<blockquote>
+<p>接的是电压跟随，主要做的是隔离和buf</p>
+</blockquote>
+<h4 id="2-3-2-ADC板"><a href="#2-3-2-ADC板" class="headerlink" title="2.3.2 ADC板"></a>2.3.2 ADC板</h4><p><img src="/:/7e7a2da234b44d84bfceecf7efe26316" alt="ADC Board.png"></p>
+<h5 id="进展"><a href="#进展" class="headerlink" title="进展"></a>进展</h5><ul>
+<li><input checked="" disabled="" type="checkbox"> 电路原理大概搞懂了</li>
+<li><input checked="" disabled="" type="checkbox"> 原版的差分放大器没有调通，还没看它的数据手册</li>
+<li><input checked="" disabled="" type="checkbox"> 了解施密特触发器的原理和作用</li>
+<li><input checked="" disabled="" type="checkbox"> 看懂编码输入的比较器lvds输出的数据手册和编码输入方式</li>
+<li><input checked="" disabled="" type="checkbox"> 看懂全差分输入输出的ADC的数据手册和使用方式</li>
+</ul>
+<h5 id="关键-1"><a href="#关键-1" class="headerlink" title="关键"></a>关键</h5><p><img src="/:/f71f2ce2aa04495ababcc8767bfbcea4" alt="c831b46fb192922362f5c9017a3cc963.png"></p>
+<ol>
+<li>编码模式(ENC)：建议正弦、PECL或LVDS编码输入采用差分编码模式。编码输入通过10k等效电阻内部偏置到1.2V。编码输入可以在VDD（高达3.6V）以上进行，共模范围为1.1V至1.6V。<strong>在差分编码模式中，ENC–应保持至少高于地面200mV，以避免错误触发单端编码模式。</strong> 为了获得良好的抖动性能，ENC+应该具有<strong>快速的上升和下降时间</strong></li>
+</ol>
+<h5 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h5><h6 id="2023-07-15-15-22"><a href="#2023-07-15-15-22" class="headerlink" title="2023.07.15 15:22"></a>2023.07.15 15:22</h6><ol>
+<li>差动放大器部分没有调通，到底是什么问题呢？是调通了信号比较差还是根本没有信号没有调通？</li>
+<li>你们为何要用差分放大器呢，你们的sensor芯片输出的模拟信号范围是多少，需要进行放大吗？</li>
+<li>LVDS编码输入部分没太看懂，这样操作是什么意思，为何要把参考接地，ENC是由FPGA直接输出的方波吗，它的范围是什么？频率是多少？JP3的作用是什么？为何要过一级施密特触发器（编码信号会更好吗）<br>因为LTC217x的数据手册说ENC+的信号质量对AD转换噪声有着很大的影响，所以ENC+的作用是什么（是固定周期调控AD转换时间吗？因为其上升沿意味着转换开始），而$t_{ENCH},t_{ENCL}$又决定了其高电平和低电平的时间，也就是编码占空比？（占空比稳定器允许其区间位于30%~70%）<br><img src="/:/a8a0436d849840c7bf08d700bb395f0f" alt="926676965df12630a548e5d96e463bd3.png"></li>
+<li>如果 Ref 端是接地，是不是就是lvds的共模为地电压，换言之，这个芯片的共模电压是怎么指定的？难道是(IN+$+$IN-)&#x2F;2？</li>
+<li>那我就要具体问了，ENC打算给什么形式的信号？最后输出的lvds编码输入的是什么效果？（包括频率，幅度，共模，范围，上升下降时间等等）</li>
+</ol>
+<blockquote>
+<ol>
+<li>共模很低，具体问题没有定位，</li>
+<li>新版也调通了，也存在较大问题</li>
+<li>SN74L–&gt;clk buf</li>
+<li>ENC（用信号发生器给），还是用的方波，实际上还是把lvds单端转差分给短掉了，可能觉得lvds出来的差分时钟信号质量不好。</li>
+<li>1lane 12bits模式</li>
+<li>主要使用差分运放做隔离，驱动能力次之</li>
+</ol>
+</blockquote>
+<h6 id="2023-07-17-13-29"><a href="#2023-07-17-13-29" class="headerlink" title="2023.07.17 13:29"></a>2023.07.17 13:29</h6><ol>
+<li>ADC板关于电源LDO部分，为何要给那么多电容，一般来说不是两个电容并联一下就可以了吗，而且手册上推荐用一个钽电容。</li>
+</ol>
+<blockquote>
+<p>给了很多点位，实际不需要这么多</p>
+</blockquote>
+<h6 id="2023-07-18-08-49"><a href="#2023-07-18-08-49" class="headerlink" title="2023.07.18 08:49"></a>2023.07.18 08:49</h6><ol>
+<li>电源板和ADC板是否需要合并，合并会有什么问题</li>
+<li>他们希望使用运放做电压跟随器作为与芯片的差分信号的隔离，但是这部分他们没调通，我们要怎么弄呢？是否还需要继续他们的方案</li>
+<li>阻容封装选用0402还是0603的呀？到时候是手焊还是机器贴片呢？</li>
+<li>关于这一款ADC我们需要继续采用吗，手册上说它的编码输入对ADC的转换精度和效果影响比较大。</li>
+<li>关于USB3.0的，我目前是想先买一块开发板来上手，老师您看咋样</li>
+<li>我完完整整的看了他们的原理图资料，没有发现什么明显的问题，但是他们实现的结果不太好，所以我们应该如何做才能确保我们的结果更好呢，他们有几个点，我没发现什么明显的错误，但就是实际效果不好，不清楚是为什么</li>
+<li>TRQ那边的那个仪器，其实很好的办法就是两套标准就好了（反正有好几路）把上位机改一改，第一路测量高色号区域，第二路测量低色号区。以后有时间测量现场去调整。</li>
+</ol>
+<blockquote>
+<p>先分开画出来，到时候再讨论细节<br>阻容封装使用0603，手焊，做第一版比较大<br>USB3.0老师那里有模块，肯定能买到，不过我还是想买一买特权同学的那个hh，或者先学一学，能不能通过连接模块和已有的开发板实现USB3.0</p>
+</blockquote>
+<h3 id="2-4-数字信号处理板"><a href="#2-4-数字信号处理板" class="headerlink" title="2.4 数字信号处理板"></a>2.4 数字信号处理板</h3><h4 id="2-4-1-进展"><a href="#2-4-1-进展" class="headerlink" title="2.4.1 进展"></a>2.4.1 进展</h4><p><img src="/:/8d49daa6a83c44eda54364c23093d504" alt="751b3d0326472a30af9d5652bf81ca03.png"><br><img src="/:/fbdb9784e8374d57a805efe87cbb1bd3" alt="1c3b4ca6a6ec8ebe89dfaac74173c7a8.png"><br>ENC frequency &#x3D; 5MHz-250MHz</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 周四看CBB</li>
+<li><input checked="" disabled="" type="checkbox"> 周四交调研报告</li>
+<li><input checked="" disabled="" type="checkbox"> 整理所有7 series fpga的内容大纲</li>
+</ul>
+<h4 id="2-4-2-问题"><a href="#2-4-2-问题" class="headerlink" title="2.4.2 问题"></a>2.4.2 问题</h4><h6 id="2023-08-15-16-35问题"><a href="#2023-08-15-16-35问题" class="headerlink" title="2023.08.15 16:35问题"></a>2023.08.15 16:35问题</h6><ol>
+<li><p>Master SPI x4 配置的几个不同点。（DOUT，EMCCLK，PUDC_B）</p>
+</li>
+<li><p>Power-on Sequence Precautions（需要确保SPI FLASH在在FPGA开始配置程序之前通电并准备好异步读取）；这一步似乎没有进行。Page57</p>
+</li>
+<li><p>如果不用到GTP，MGT电压是否可以不用配置（应该可以）</p>
+</li>
+<li><p>电压值在手册的哪里要求了，哪个手册呢，在配置手册我没找到。</p>
+</li>
+<li><p>另外VCCINT，VCCBRAM，VCCAUX和VCCO之间的上电顺序我没有看到，反倒是看到了第二条</p>
+</li>
+<li><p>BANK0配置问题</p>
+</li>
+<li><p>电源时序和电压值问题(电源时序那一节)</p>
+</li>
+<li><p>DDR3不需要问题</p>
+</li>
+<li><p>复位信号问题</p>
+</li>
+<li><p>IO口有无特别注意事项</p>
+</li>
+<li><p>电容数量</p>
+</li>
+<li><p>将BANK配置为LVDS_25标准后，该BANK是否还能进行单端信号输出。</p>
+</li>
+</ol>
+<p>5MHz<br>640* 512<br>187.5Mbit&#x2F;s</p>
+<h6 id="2023-08-20-16-37问题：-IO需要引脚验证（Vivado）"><a href="#2023-08-20-16-37问题：-IO需要引脚验证（Vivado）" class="headerlink" title="2023.08.20 16:37问题：&#x3D;&#x3D;IO需要引脚验证（Vivado）&#x3D;&#x3D;"></a>2023.08.20 16:37问题：&#x3D;&#x3D;IO需要引脚验证（Vivado）&#x3D;&#x3D;</h6><ol>
+<li>普通IO什么都不做</li>
+<li>差分需要过差分原语</li>
+<li>时钟需要驱动逻辑</li>
+<li>检查主时钟能否PLL其他时钟</li>
+<li>Cadence可以导出ucf，并利用excel生成xdc</li>
+<li>SPI FLASH约束固定，也要写<br>会有critical warning<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module</span><br><span class="line">input</span><br><span class="line">output</span><br><span class="line"></span><br><span class="line">// 差分信号输入方式</span><br><span class="line">// 如果是差分信号，找原语，导入差分信号</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-思考讨论"><a href="#3-思考讨论" class="headerlink" title="3 思考讨论"></a>3 思考讨论</h2><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>合并版效果较差的可能原因是芯片和差分ADC共电源了，造成电源回路耦合干扰。</li>
+</ol>
+<h2 id="4-修改意见"><a href="#4-修改意见" class="headerlink" title="4 修改意见"></a>4 修改意见</h2><ol>
+<li>FPGA重新选型，不需要那么大的，选择一款适合的CPLD即可。</li>
+<li>不需要DDR3。</li>
+</ol>
+<blockquote>
+<p>选择XC7A35T-2CSGI或XC7A35T-2CSGC<br>仔细看FPGA artix7 数据手册</p>
+</blockquote>
+<h2 id="5-Layout-注意事项"><a href="#5-Layout-注意事项" class="headerlink" title="5 Layout 注意事项"></a>5 Layout 注意事项</h2><h3 id="5-1-LTC217x"><a href="#5-1-LTC217x" class="headerlink" title="5.1 LTC217x"></a>5.1 LTC217x</h3><ol>
+<li>需要一块完整的接地平面</li>
+<li>数字信号和模拟信号尽可能的分隔开来，不要再模拟信号轨道旁和ADC下方运行数字轨道。</li>
+<li>VDD，OVDD，VREF，REFH，REFL引脚应当使用高品质的陶瓷旁路电容器靠近引脚放置，尤其是REFH和REFL之间的电容器。</li>
+<li>REFH和REFL之间的0.1uF的电容器应当与LTC217x芯片位于电路板同侧，并尽可能的靠近引脚（1.5mm以内），建议使用0402封装。</li>
+<li>REFH和REFL之间的2.2uF的电容器可以离得远一些</li>
+<li>连接引脚和旁路电容器的迹线尽量短和宽。</li>
+<li>模拟输入信号，编码输入信号和数字输出信号不要彼此相邻。请使用接地填充和接地过孔隔离这些信号。</li>
+<li>底部暴露焊盘必须良好地接地以提供更好的散热特性。</li>
+<li>数据手册Page28-30提供了Typical Applications的Layout布局图可供参考（六层板）</li>
+</ol>
+<h3 id="5-2-LTC6419"><a href="#5-2-LTC6419" class="headerlink" title="5.2 LTC6419"></a>5.2 LTC6419</h3><ol>
+<li>将输入引脚的杂散电容保持在绝对最小值。</li>
+<li>输入输出端保持对称，平衡。</li>
+</ol>
+<h3 id="5-3-AD5601"><a href="#5-3-AD5601" class="headerlink" title="5.3 AD5601"></a>5.3 AD5601</h3><ol>
+<li>AGND-to-DGND的连接必须尽可能靠近AD5601；再ADC处仅保持数字信号和模拟信号路径分隔即可。</li>
+<li>电源的旁路电容器尽可能靠近引脚，0.1uF的电容器最好正对着芯片。10uF电容器使用钽电容。0.1uF电容器使用具有低ESR和低ESI的电容器。</li>
+</ol>
+<h3 id="5-4-LM1117"><a href="#5-4-LM1117" class="headerlink" title="5.4 LM1117"></a>5.4 LM1117</h3><ol>
+<li>承载负载电流的迹线必须较宽，以减少寄生电感。</li>
+<li>VOUT到ADJ的反馈环路必须尽可能短。</li>
+<li>ADJ引脚地旁路电容必须尽可能靠近芯片</li>
+</ol>
+<h3 id="5-5-CY7C68013A"><a href="#5-5-CY7C68013A" class="headerlink" title="5.5 CY7C68013A"></a>5.5 CY7C68013A</h3><ol>
+<li>需要四层阻抗控制板来保持信号质量</li>
+<li>DPLUS和DMINUS的迹线长度差应该保持再2mm以内，它们的优选迹线长度为20~30mm。</li>
+<li>保持DP和DN迹线下的平面完整。</li>
+<li>DP和DN迹线上不要放置过孔。</li>
+<li>DP和DN迹线与其他信号线之间的间距不要小于10mm。</li>
+</ol>
+<h3 id="5-6-LTM4644"><a href="#5-6-LTM4644" class="headerlink" title="5.6 LTM4644"></a>5.6 LTM4644</h3><ol>
+<li>IC下方需要有完整的地平面；</li>
+<li>为了最大限度地减少通孔传导损耗和热应力，再顶层和其他功率层之间请使用多个通孔进行互连；</li>
+<li>电源输入输出迹线尽可能宽；</li>
+<li>旁路电容器尽可能靠近IC引脚。</li>
+</ol>
+<h3 id="5-7-FPGA"><a href="#5-7-FPGA" class="headerlink" title="5.7 FPGA"></a>5.7 FPGA</h3><ol>
+<li>旁路电容器接地安装的推荐示例<br><img src="/:/9489c7eef57946f4aadc4fc9aadc3f02" alt="a648599ef5eeedcb4cd43f41cf162207.png"></li>
+<li>时钟晶振源尽可能靠近FPGA相应的时钟引脚放置。</li>
+<li>时钟线信号尽量走直线，千万避免直角走线，不要使用过孔，不要同时在多个信号层走时钟线。</li>
+<li>GCLK，IFCLK，SCLK，SCK是时钟线，DCO_P，DCO_N，ENC_P, ENC_N是时钟差分线。</li>
+<li>配置芯片（FLASH）尽量靠近FPGA。</li>
+<li>电源层与地层之间的绝缘层应该尽可能薄，以增强耦合电容和平面电容（通常取3~4mil）</li>
+<li>电源分割线的间距应该在25~100mil。</li>
+<li>电源引脚应该就近直连到相应的电源层，每个电源引脚都应该至少有一个专用过孔连接到电源层。</li>
+<li>BANK15走的是LVDS差分线，差分对信号的走线长度必须保持一致，尽量少用过孔。</li>
+<li>单端信号与差分信号之间最好能够保证12mm以上的间距，以避免任何串扰影响。</li>
+<li>更多FPGA PCB layout知识参见<a target="_blank" rel="noopener" href="https://www.xilinx.com/content/dam/xilinx/support/documents/user_guides/ug483_7Series_PCB.pdf">ug483_7Series_PCB</a></li>
+</ol>
+<h1 id="ROIC-PCB-v1调试记录"><a href="#ROIC-PCB-v1调试记录" class="headerlink" title="ROIC PCB_v1调试记录"></a>ROIC PCB_v1调试记录</h1><h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><ol>
+<li>以后做项目一定要<strong>边焊接边调试</strong>，不要堆到焊接完成后在进行调试，这样调试难度会增大；</li>
+<li>10uF以上的大电容，绘制电路图时一定要考虑封装和极性（简单来说就是要考虑实际情况）</li>
+<li>非常规阻值一定要考虑使用串并联的方式搭配；</li>
+</ol>
+<h2 id="模拟板"><a href="#模拟板" class="headerlink" title="模拟板"></a>模拟板</h2><ol>
+<li><p>LTC6419会拉低供电电压，原因未知；目前可采取的解决方案是直接使用5V供电，5V供电也会拉低至4.8V，但是不影响系统的整体供电；</p>
+</li>
+<li><p>LTC217也可能会拉低系统的供电电压，目前尚未确定影响程度；</p>
+<blockquote>
+<p>还要考虑封装？？？<br>&#x3D;&#x3D;原理图引脚不能乱画，尤其是与别人配合绘制元器件原理图和封装的时候，这次吃大亏了；&#x3D;&#x3D;</p>
+</blockquote>
+</li>
+<li><p>有一块板的ADC不响应；焊接好ADC和运放；</p>
+<blockquote>
+<p>可能是坏了，另一块是好的，但是SDO输出比较慢，影响到读取，但是不影响系统正常工作；</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="数字板"><a href="#数字板" class="headerlink" title="数字板"></a>数字板</h2><ol>
+<li><p>EA3059电源管理芯片可能存在问题，也有可能是其他原因拉低了EA3059的输出电压；目前原因未知；</p>
+<blockquote>
+<p>原因是有一颗电容选错了，导致电源输出后进入RCL滤波电路，电源被滤拉低（可是直流不应该啊，不知道开关电源输出是什么情况，总之就是要严格按照数据手册上的值安排阻容；</p>
+</blockquote>
+</li>
+<li><p>68013通信问题：出现红色感叹号未连接；或者干脆USB设备不正常</p>
+<blockquote>
+<p>磁珠去掉就可以了<a target="_blank" rel="noopener" href="https://bbs.21ic.com/icview-1602916-1-1.html">（得搜索，相信前人的智慧）</a><br><img src="/:/5aef1742e8cd43c2923e677c8515cfbf" alt="aa8365646abeaaf69d3d772bdbf4ee03.png"></p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 68013设备描述符识别失败的问题仍然经常出现，时而消失，考虑问题如下：<blockquote>
+<ol>
+<li>USB接口供电电流不足；尝试使用适配器供电试试</li>
+<li>复位芯片同时给FPGA和USB2.0提供复位信号存在问题，看一下能否使用两个复位芯片；<br><img src="/:/d584bc68db6f4edf916418ef2c3758bf" alt="0ca9e06950f65f81ec7e2d1889111c52.png"></li>
+<li>type-C接口也可能会存在影响信号反射的问题；下一版还是老老实实使用mini接口</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="FPGA"><a href="#FPGA" class="headerlink" title="FPGA"></a>FPGA</h2><ol>
+<li>存在焊接问题（目前应该算是解决了）</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/">https://planckzgh.github.io/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/bg1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Vimium简明教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vimium简明教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">planckgh</div><div class="author-info__description">学习记录与分享</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-text">ROIC项目电路设计与调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E9%83%A8%E5%88%86"><span class="toc-text">设计部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="toc-text">软件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FPGA%E5%BC%80%E5%8F%91"><span class="toc-text">FPGA开发</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="toc-text">代码框架</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E4%B8%8E%E8%A7%A3%E4%B8%B2"><span class="toc-text">数据接收与解串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%83%8F%E7%B4%A0%E9%A1%BA%E5%BA%8F%E7%9A%84%E8%B0%83%E6%95%B4"><span class="toc-text">像素顺序的调整</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BA%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="toc-text">固件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#slavefifo%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">slavefifo的配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="toc-text">硬件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%9D%BF"><span class="toc-text">数字信号处理板</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%9D%BF"><span class="toc-text">模拟信号处理板</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E9%83%A8%E5%88%86"><span class="toc-text">调试部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E9%97%AE%E9%A2%98"><span class="toc-text">软件问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E9%97%AE%E9%A2%98"><span class="toc-text">硬件问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BB%86%E8%8A%82%E6%80%9D%E8%80%83"><span class="toc-text">1.2 细节思考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86"><span class="toc-text">2 硬件部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%BF%9B%E5%B1%95"><span class="toc-text">2.1 进展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%97%AE%E9%A2%98"><span class="toc-text">2.2 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2023-07-14-09-51"><span class="toc-text">2023.07.14 09:51</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2023-10-08-10-52"><span class="toc-text">2023.10.08 10:52</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%9D%BF"><span class="toc-text">2.3 模拟信号处理板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E7%94%B5%E6%BA%90%E6%9D%BF"><span class="toc-text">2.3.1 电源板</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E9%94%AE"><span class="toc-text">关键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-ADC%E6%9D%BF"><span class="toc-text">2.3.2 ADC板</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9B%E5%B1%95"><span class="toc-text">进展</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E9%94%AE-1"><span class="toc-text">关键</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-1"><span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2023-07-15-15-22"><span class="toc-text">2023.07.15 15:22</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2023-07-17-13-29"><span class="toc-text">2023.07.17 13:29</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2023-07-18-08-49"><span class="toc-text">2023.07.18 08:49</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E6%9D%BF"><span class="toc-text">2.4 数字信号处理板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-%E8%BF%9B%E5%B1%95"><span class="toc-text">2.4.1 进展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-%E9%97%AE%E9%A2%98"><span class="toc-text">2.4.2 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2023-08-15-16-35%E9%97%AE%E9%A2%98"><span class="toc-text">2023.08.15 16:35问题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2023-08-20-16-37%E9%97%AE%E9%A2%98%EF%BC%9A-IO%E9%9C%80%E8%A6%81%E5%BC%95%E8%84%9A%E9%AA%8C%E8%AF%81%EF%BC%88Vivado%EF%BC%89"><span class="toc-text">2023.08.20 16:37问题：&#x3D;&#x3D;IO需要引脚验证（Vivado）&#x3D;&#x3D;</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%80%9D%E8%80%83%E8%AE%A8%E8%AE%BA"><span class="toc-text">3 思考讨论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-text">思考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BF%AE%E6%94%B9%E6%84%8F%E8%A7%81"><span class="toc-text">4 修改意见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Layout-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">5 Layout 注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-LTC217x"><span class="toc-text">5.1 LTC217x</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-LTC6419"><span class="toc-text">5.2 LTC6419</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-AD5601"><span class="toc-text">5.3 AD5601</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-LM1117"><span class="toc-text">5.4 LM1117</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-CY7C68013A"><span class="toc-text">5.5 CY7C68013A</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-LTM4644"><span class="toc-text">5.6 LTM4644</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-FPGA"><span class="toc-text">5.7 FPGA</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROIC-PCB-v1%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95"><span class="toc-text">ROIC PCB_v1调试记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-text">经验总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E6%9D%BF"><span class="toc-text">模拟板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%9D%BF"><span class="toc-text">数字板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FPGA"><span class="toc-text">FPGA</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/" title="ROIC项目电路设计与调试"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ROIC项目电路设计与调试"/></a><div class="content"><a class="title" href="/2024/01/31/ROIC%E9%A1%B9%E7%9B%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%B0%83%E8%AF%95/" title="ROIC项目电路设计与调试">ROIC项目电路设计与调试</a><time datetime="2024-01-31T14:40:07.000Z" title="发表于 2024-01-31 22:40:07">2024-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Vimium简明教程"><img src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vimium简明教程"/></a><div class="content"><a class="title" href="/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Vimium简明教程">Vimium简明教程</a><time datetime="2024-01-31T04:57:15.000Z" title="发表于 2024-01-31 12:57:15">2024-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/16/%E3%80%90vivado%E3%80%91VIO%E5%92%8CILA%E8%81%94%E5%90%88%E8%B0%83%E8%AF%95%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="【vivado】VIO和ILA联合调试小技巧"><img src="https://th.bing.com/th?id=OSK.pzQDpRxzW0uHoppSlhjDAQe4O4c-t04wirhxGvZEoyk&amp;w=188&amp;h=132&amp;c=7&amp;o=6&amp;pid=SANGAM" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【vivado】VIO和ILA联合调试小技巧"/></a><div class="content"><a class="title" href="/2024/01/16/%E3%80%90vivado%E3%80%91VIO%E5%92%8CILA%E8%81%94%E5%90%88%E8%B0%83%E8%AF%95%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="【vivado】VIO和ILA联合调试小技巧">【vivado】VIO和ILA联合调试小技巧</a><time datetime="2024-01-16T05:18:37.000Z" title="发表于 2024-01-16 13:18:37">2024-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/19/IC%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="IC设计基础知识"><img src="https://th.bing.com/th/id/OIP.niYooSBTXteNCYs8AEthpgHaE8?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IC设计基础知识"/></a><div class="content"><a class="title" href="/2023/12/19/IC%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="IC设计基础知识">IC设计基础知识</a><time datetime="2023-12-19T08:25:18.000Z" title="发表于 2023-12-19 16:25:18">2023-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/19/win11%E4%B8%8Bwsl2%E6%90%AD%E5%BB%BAvcs2016-verdi%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%95%99%E7%A8%8B/" title="win11下wsl2搭建vcs2016+verdi开发环境教程"><img src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="win11下wsl2搭建vcs2016+verdi开发环境教程"/></a><div class="content"><a class="title" href="/2023/12/19/win11%E4%B8%8Bwsl2%E6%90%AD%E5%BB%BAvcs2016-verdi%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%95%99%E7%A8%8B/" title="win11下wsl2搭建vcs2016+verdi开发环境教程">win11下wsl2搭建vcs2016+verdi开发环境教程</a><time datetime="2023-12-19T07:15:52.000Z" title="发表于 2023-12-19 15:15:52">2023-12-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By planckgh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
