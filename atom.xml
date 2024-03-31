@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2024-03-24T07:07:38.599Z</updated>
+  <updated>2024-03-31T11:32:51.393Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git简明教程</title>
+    <link href="https://planckzgh.github.io/2024/03/31/Git%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"/>
+    <id>https://planckzgh.github.io/2024/03/31/Git%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</id>
+    <published>2024-03-31T11:30:30.000Z</published>
+    <updated>2024-03-31T11:32:51.393Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><h2 id="参考资料">参考资料</h2><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600">Git教程</a><br><a href="https://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></p></blockquote><h2 id="个人项目的版本控制流">个人项目的版本控制流</h2><ol><li>下载安装git，进行user.name和user.email的配置</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;planckgh@gmail.com&quot;</span><br></pre></td></tr></table></figure><ol start="2"><li>完成ssh密钥配置</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;planckgh@gmail.com&quot;</span><br></pre></td></tr></table></figure><ol start="3"><li>在本地工作目录新建git版本管理库</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><ol start="4"><li>新建工作文件(<code>test.c</code>)</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvim test.c</span><br></pre></td></tr></table></figure><ol start="6"><li>添加改动文件至暂存区</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">git add test.c</span><br><span class="line"># 所有文件</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure><ol start="6"><li>完成阶段性工作后，提交至HEAD</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 改动提示不长</span><br><span class="line">git commit -m &quot;改动提示&quot;</span><br><span class="line"># 改动提示较长</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure><p><img src="https://rogerdudler.github.io/git-guide/img/trees.png" alt=""></p><ol start="7"><li>查看版本提交记录</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure><ol start="8"><li>回溯版本</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure><ol start="9"><li>查看回溯历史</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure><ol start="10"><li>推送至远程仓库<ol><li>在github上创建新仓库，获取仓库链接</li><li>将本地仓库与远程仓库进行关联</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/planckzgh/ROIC.git</span><br></pre></td></tr></table></figure><ol start="3"><li>将本地仓库推送至远程仓库</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push (-u) origin master</span><br></pre></td></tr></table></figure><ol start="4"><li>修改本地仓库关联链接</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://github.com/planckzgh/ROIC.git</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/896043488029600&quot;&gt;Git教程&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://rogerdudle</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://planckzgh.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>建立时间与保持时间</title>
