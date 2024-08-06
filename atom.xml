@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2024-07-29T16:29:42.519Z</updated>
+  <updated>2024-08-06T06:21:50.335Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gdb简明教程</title>
+    <link href="https://planckzgh.github.io/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"/>
+    <id>https://planckzgh.github.io/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</id>
+    <published>2024-08-06T06:18:12.000Z</published>
+    <updated>2024-08-06T06:21:50.335Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="make-gdb"><code>make gdb</code></h1><ul><li><code>x</code>：扫描内存</li><li><code>b</code>：设置断点</li><li><code>c</code>：继续执行程序</li><li><code>r</code>：重新开始执行程序</li><li><code>s</code>：单步执行且进入函数</li><li><code>n</code>：单步执行但不进入函数</li><li><code>p</code>：打印变量或寄存器的值</li><li><code>bt</code>：查看调用栈</li><li><code>watch</code>：设置监视点</li><li><code>finish</code>：跳出当前函数</li><li><code>layout src</code>：查看源代码</li><li><code>layout split</code>：查看汇编代码</li><li><code>ctrl + p / n</code>：回溯历史命令</li><li><code>help xxx</code>：查看<code>xxx</code>命令的帮助</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;make-gdb&quot;&gt;&lt;code&gt;make gdb&lt;/code&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt;：扫描内存&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b&lt;/code&gt;：设置断点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;：继续执行程序&lt;/li&gt;
+&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://planckzgh.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>数字IC试题</title>
