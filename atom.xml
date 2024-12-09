@@ -6,7 +6,7 @@
   <link href="https://planckzgh.github.io/atom.xml" rel="self"/>
   
   <link href="https://planckzgh.github.io/"/>
-  <updated>2024-08-06T06:21:50.335Z</updated>
+  <updated>2024-12-09T09:55:44.546Z</updated>
   <id>https://planckzgh.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>常用工具合集</title>
+    <link href="https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/"/>
+    <id>https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/</id>
+    <published>2024-12-09T09:17:03.000Z</published>
+    <updated>2024-12-09T09:55:44.546Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="tools">Tools</h1><h2 id="vim">vim</h2><h3 id="basic">Basic</h3><ol><li>单词的大小写转换： <code>(visual mode) &lt;U&gt; &amp; &lt;u&gt;</code></li><li><a href="https://segmentfault.com/a/1190000021097211">快速跳转</a>：匹配括号之间跳转 <code>%</code> ，函数头尾跳转 <code>[&#123;</code></li><li>历史位置跳转： <code>&lt;C-o&gt;</code> <code>&lt;C-i&gt;</code> <code>''</code></li><li>启用折叠 <code>zN</code>，禁用折叠 <code>zn</code> ，开关折叠 <code>za</code></li><li>根据路径跳转文件： <code>gf</code></li><li>当需要多次copy而希望剪贴板不被visual模式选择的新内容覆盖时，选用特殊寄存器存储copy的内容： <code>&quot;ay -&gt; v（选择被覆盖的内容） -&gt;&quot;ap -&gt; &quot;ap</code></li><li>标记语法 <code>m&#123;letter&#125;</code>，跳转语法 ``{letter}`<ul><li><code>m[a-z]</code> - 小写字母的, 创建一个可以在当前文件(缓冲区)进行跳转的标签</li><li><code>m[A-Z]</code> - 大写字母的, 创建一个可以全局的标签, 可以在多个文件之前跳转</li></ul></li></ol><h3 id="plugin">Plugin</h3><ol><li>对齐：Tabular</li><li>补全：<a href="https://wulc.me/2015/12/01/vim%E4%B8%ADSuperTab%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">SuperTab</a></li><li>跳转：ctags 可拓展支持 SystemVerilog<ul><li><a href="https://blog.csdn.net/weixin_44966641/article/details/121942367">基本使用方法</a>：<code>ctags -R .</code></li><li>vim配置： <code>set tags=./tags;/</code> <code>nnoremap &lt;space&gt;n g&lt;C-]&gt;</code></li><li>systemverilog.ctags文件配置：<a href="https://blog.csdn.net/zhajio/article/details/45014837">ctags for systemverilog</a>, <a href="https://coderwall.com/p/fy7stg/vim-and-systemverilog">ctags config for systemverilog</a></li></ul></li><li>跳转：<a href="https://www.vim.org/scripts/script.php?script_id=5494">vtags</a> 基于python强支持verilog/systemverilog</li><li>文件树：<a href="https://blog.csdn.net/somenzz/article/details/120735538">netrw</a></li><li>自动缩进：verilog_systemverilog.vim</li><li>其他自动化操作：<a href="https://automatic-verilog.honk.wang/#/handbook?id=%E6%A0%91%E7%8A%B6%E6%8B%93%E6%89%91-rtltree">automatic-verilog</a></li></ol><h3 id="command">Command</h3><ul><li>删除含有指定pattern的行： <code>:g/pattern/d</code></li><li>区分大小写替换操作： <code>:%s/\Ckey1/key2/g</code></li></ul><h3 id="note">Note</h3><ol><li>vim 语法折叠巨慢，而且切换文件还会恢复折叠，打开大文件不建议使用</li></ol><h2 id="grep">grep</h2><h3 id="basic"><a href="https://blog.csdn.net/LONG_Yi_1994/article/details/131051728">Basic</a></h3><ol><li>文件查找：</li><li>文本查找：</li></ol><h2 id="sed">sed</h2><h3 id="basic"><a href="https://blog.csdn.net/qq_45206551/article/details/104498965">Basic</a></h3><h2 id="verdi">verdi</h2><h3 id="basic">Basic</h3><ul><li><a href="https://blog.csdn.net/cy413026/article/details/124653544#:~:text=%E9%A6%96%E5%85%88%E5%9C%A8%E8%8F%9C%E5%8D%95%E6%A0%8F%20%E7%82%B9%E5%87%BBview-%3EsignalList%E7%AA%97%E5%8F%A3%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E6%89%80%E6%9C%89%E4%BF%A1%E5%8F%B7%E4%BD%8D%E5%AE%BD%E9%83%BD%E6%98%AF%E6%95%B0%E5%AD%97%E7%9A%84%EF%BC%8C%E8%BF%87%E6%BB%A4%E5%87%BA%E8%87%AA%E5%B7%B1%E5%85%B3%E5%BF%83%E7%9A%84%E4%BF%A1%E5%8F%B7%EF%BC%8C%E9%80%89%E4%B8%AD%E8%BF%99%E4%BA%9B%E4%BF%A1%E5%8F%B7%E5%8F%B3%E9%94%AE-%3Esave%20selected%20signals%20to,file%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BF%9D%E5%AD%98%E4%B8%BA%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E3%80%82%202.%E5%B0%86%E6%9F%90%E4%B8%AAHierarchy%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%B1%82%E6%AC%A1%E5%AF%BC%E5%87%BA%20%E5%9C%A8instance%E7%AA%97%E5%8F%A3%E9%80%89%E6%8B%A9%E6%9F%90%E4%B8%80%E4%BE%8B%E5%8C%96%E5%B1%82%E6%AC%A1%EF%BC%8C%E5%8F%B3%E9%94%AE-%3E%20Export%20Hierarchy%E5%8D%B3%E5%8F%AF">verdi将rtl中参数信号位宽导出为数字&amp;导出rtl层次_verdi将信号数据存入文件-CSDN博客</a></li></ul><h3 id="install">Install</h3><p><a href="https://bbs.eetop.cn/thread-856230-1-1.html">verdi_vL-2016.06-1百度网盘分享 - IC验证资料 -  EETOP 创芯网论坛 (原名：电子顶级开发网) -</a></p><h3 id="config">Config</h3><p><a href="novas.rc">novas.rc</a></p><h3 id="hotkeys">Hotkeys</h3><ol><li><code>h</code> 在波形窗口查看信号的完整路径</li><li><code>x</code> 在代码窗口查看信号的值和跳变</li><li><code>m</code> 在代码窗口查看宏的展开形式</li></ol><h2 id="tmux">tmux</h2><h3 id="basic"><a href="https://louiszhai.github.io/2017/09/30/tmux/#%E4%BF%AE%E6%94%B9%E6%8C%87%E4%BB%A4%E5%89%8D%E7%BC%80">Basic</a></h3><ul><li>查看快捷键：<code>&lt;prefix&gt; + ?</code></li><li>窗口重命名：<code>&lt;prefix&gt; + $</code></li><li>窗格重命名：<code>&lt;prefix&gt; + ,</code></li><li>调整窗格的分布位置：<code>&lt;prefix&gt; + &lt;C-o&gt;</code></li><li>将水平分割转换为垂直分割： <code>&lt;prefix&gt; + &lt;space&gt;</code></li><li>将窗格独立成一个新窗口： <code>&lt;prefix&gt; + !</code></li><li>多窗格同步：<code>&lt;prefix&gt; + :synchronize-panes</code></li></ul><h3 id="config"><a href="https://geekdaxue.co/read/tao-of-tmux-CN/manuscript-09-status-bar.md">Config</a></h3><ul><li>重新载入当前配置： <code>tmux source ~/.tmux.conf</code></li></ul><h3 id="debug">Debug</h3><ol><li><a href="https://blog.csdn.net/qq_16763983/article/details/130450323">多屏幕打开同一个tmux会产生分辨率冲突的问题</a>：<ul><li>在配置文件中加入 <code>set-window-option -g aggressive-resize</code></li><li>选择最小分辨率：<code>&lt;prefix&gt; + D</code></li></ul></li></ol><h2 id="svn"><a href="https://blog.csdn.net/zhoenet/article/details/122292970">svn</a></h2><ol><li>显示库信息： <code>svn info</code></li><li>文件改动状态： <code>svn st</code>  仅显示当前路径： <code>svn st -N</code></li><li>比较本地与库中的文件： <code>svn diff &lt;file&gt; or &lt;dir&gt;</code></li><li>提交本地文件到库： <code>svn ci [-m &quot;text&quot;] &lt;localfile&gt;</code></li><li>创建的新文件并提交到库： <code>svn add &lt;localfile&gt; or &lt;localpath&gt;</code> → <code>svn ci -m &quot;text&quot; &lt;localfile&gt; or &lt;localpath&gt;</code></li><li>将库文件下载到本地目录： <code>svn co &lt;svn_url&gt; &lt;local_path&gt;</code></li><li>更新到最新版本： <code>svn up &lt;file or dir&gt; [-t xx]</code><ol><li>svn操作文件缩写： <code>U</code> 从服务器更新（update）； <code>A</code> 新增文件； <code>D</code> 删除文件； <code>C</code> 冲突；<a href="https://blog.csdn.net/FlyingKuiKui/article/details/80423035">https://blog.csdn.net/FlyingKuiKui/article/details/80423035</a></li><li>当存在冲突时： <code>tc</code> 以库文件为准； <code>mc</code> 以本地文件为准； <code>p</code> 标记冲突，稍后解决； <a href="https://blog.csdn.net/zhaoshaoyan123/article/details/125394784">https://blog.csdn.net/zhaoshaoyan123/article/details/125394784</a></li><li>解决冲突后，需要标记冲突已解决： <code>svn resolve --accept=working &lt;filename&gt;</code>  <code>svn resolved &lt;filename&gt;</code> 会删除因冲突而创建的相关文件</li><li><a href="https://blog.csdn.net/raoxiaoya/article/details/107963301">https://blog.csdn.net/raoxiaoya/article/details/107963301</a></li></ol></li><li>删除库中的文件： <code>svn delete &lt;filename&gt;     svn ci -m &quot;delete filename&quot;</code>  <a href="https://blog.csdn.net/Morris_/article/details/108746600">https://blog.csdn.net/Morris_/article/details/108746600</a></li><li>查看修改历史： <code>svn log &lt;dir&gt; [-v]</code></li></ol><h2 id="regex">regex</h2><p><a href="https://stackoverflow.org.cn/regexsucha/">正则表达式语法速查|正则教程</a></p><p><a href="https://blog.csdn.net/qq_44273429/article/details/132988625">https://blog.csdn.net/qq_44273429/article/details/132988625</a></p><h2 id="questasim-or-modelsim">questasim or modelsim</h2><ul><li><code>vlog -help all</code></li><li><a href="https://blog.csdn.net/Xminyang/article/details/132781868">https://blog.csdn.net/Xminyang/article/details/132781868</a></li><li><a href="https://blog.csdn.net/Lin_w_x/article/details/125484206">https://blog.csdn.net/Lin_w_x/article/details/125484206</a></li></ul><h2 id="gdb">gdb</h2><h3 id="basic">Basic</h3><ul><li><code>r</code>：重新开始执行程序</li><li><code>c</code>：继续执行程序</li><li><code>s</code>：单步执行且进入函数</li><li><code>n</code>：单步执行但不进入函数</li><li><code>finish</code>：跳出当前函数</li><li><code>p</code>：打印变量或寄存器的值</li><li><code>x</code>：扫描内存</li><li><code>bt</code>：查看调用栈</li><li><code>b</code>：设置断点   <code>b main</code> <code>b 92</code></li><li><code>watch</code>：设置监视点</li><li><code>help xxx</code>：查看<code>xxx</code>命令的帮助</li><li><code>layout src</code>：查看源代码</li><li><code>layout split</code>：查看汇编代码</li><li><code>ctrl + p / n</code>回溯历史命令</li></ul><h3 id="debug">Debug</h3><ul><li>layout模式下容易出现花屏现象，使用 <code>ctrl + l</code> 进行清屏</li></ul><h2 id="cgdb"><a href="https://cgdb.github.io/">cgdb</a></h2><h2 id="pdb"><a href="https://blog.csdn.net/qq_43799400/article/details/122582895">pdb</a></h2><h2 id="bsub">bsub</h2><h3 id="basic">Basic</h3><ul><li><code>busers</code>：查看用户提交的任务的运行、排队情况</li><li><code>bjobs -all &gt; job.log</code>：查看用户正在运行的job记录</li></ul><h2 id="sort"><a href="https://www.runoob.com/linux/linux-comm-sort.html">sort</a></h2><h2 id="uniq"><a href="https://blog.csdn.net/qq_43382735/article/details/121007185">uniq</a></h2><h2 id="pandoc">pandoc</h2><ol><li><a href="https://blog.csdn.net/qq_27464321/article/details/88853270">tex2word</a></li></ol><h2 id="other">other</h2><ol><li><code>gio open xxx.xlsx</code></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;tools&quot;&gt;Tools&lt;/h1&gt;
+&lt;h2 id=&quot;vim&quot;&gt;vim&lt;/h2&gt;
+&lt;h3 id=&quot;basic&quot;&gt;Basic&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;单词的大小写转换： &lt;code&gt;(visual mode) &amp;lt;U&amp;gt; &amp;amp; &amp;lt;u&amp;gt;&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="工作" scheme="https://planckzgh.github.io/tags/%E5%B7%A5%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>gdb简明教程</title>
@@ -485,31 +511,6 @@ Mermaid 是一种使用文本生成流程图、饼状图、甘特图等图表的
     
     
     <category term="教程" scheme="https://planckzgh.github.io/tags/%E6%95%99%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Joplin笔记恢复记录</title>
-    <link href="https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/"/>
-    <id>https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/</id>
-    <published>2023-10-23T02:03:30.000Z</published>
-    <updated>2024-03-24T10:55:18.046Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="记一次joplin笔记恢复记录">记一次Joplin笔记恢复记录</h1><h2 id="1-原因">1 原因</h2><p>更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。</p><h2 id="2-找回方法">2 找回方法</h2><h3 id="2-1-确定现象">2.1 确定现象</h3><p>打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive/应用/Joplin）</p><p><strong>注意</strong>：此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，也算曾经对原路径改动过，Joplin仍然会忽略我们改回的路径，重新创建一个同步路径。<br>那我自己举例：</p><ol><li>我将Joplin同步路径（Onedrive/应用/Joplin）不小心更改为（Onedrive/Apps/Joplin）。</li><li>在上述操作不知情时，我打开Joplin记笔记，Joplin会自动同步，找不到路径重新生成新路径（Onedrive/应用/Joplin），此时我发现同步笔记数据部分丢失。</li><li>于是我删除了Joplin重新创建的新路径（因为新路径的笔记数据不完整），将第一步操作重做（即，重新将Joplin同步路径更改为Onedrive/应用/Joplin）</li><li>此时，我再次打开Joplin，发现Joplin似乎不认识原路径，自动同步状态下重新创建了新路径（Onedrive/应用 1/Joplin）</li></ol><h3 id="2-2-解决方案">2.2 解决方案</h3><p>利用Joplin同步一共分为五个步骤。</p><ol><li>备份Joplin笔记数据。</li><li>清空Onedrive中Joplin的同步路径（无论是Joplin的原始同步路径，还是Joplin后来创建的新的同步路径）。</li><li>打开Joplin，等待Joplin同步完成，自动创建同步路径（Onedrive/应用/Joplin），<strong>不要</strong>关闭Joplin软件。</li><li>删除（Onedrive/应用）路径下的Joplin文件夹，更换为第一步已备份的Joplin文件夹。</li><li>点击Joplin软件菜单栏的工具–&gt;选项–&gt;同步–&gt;显示高级选项–&gt;重新上传本地数据到同步目标–&gt;确定，等待Joplin上传本地项目。此时，Joplin笔记数据会慢慢恢复。</li></ol><h2 id="3-总结">3 总结</h2><p>经此一次，我得出教训，Joplin同步路径最好不要乱动，对于平日在Joplin记录的重要内容要定期定时进行多端（手机端，电脑端、平板端和网页端）同步。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;记一次joplin笔记恢复记录&quot;&gt;记一次Joplin笔记恢复记录&lt;/h1&gt;
-&lt;h2 id=&quot;1-原因&quot;&gt;1 原因&lt;/h2&gt;
-&lt;p&gt;更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。&lt;/p&gt;
-&lt;h2 id=&quot;2-找回方法&quot;&gt;2 找回</summary>
-      
-    
-    
-    
-    
-    <category term="记录" scheme="https://planckzgh.github.io/tags/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
