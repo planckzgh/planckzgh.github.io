@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tmux简明教程 | planckgh</title><meta name="author" content="planckgh"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Tmux简明教程  参考资料：可能是东半球最全面易懂的 Tmux 使用教程！( 强烈建议收藏 )  Tmux简介  会话：用户在终端窗口(进程)中输入命令进行交互，称为一次会话； Tmux就是会话与窗口的解绑工具。  基本操作 1. 前缀键：ctrl+b  + 方向键：切换窗格 + alt 方向键：调整窗格大小 + n：切换窗口 + s （+ 方向键）：列出所有会话（显示分支结构） + x：关闭当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tmux简明教程">
+<meta property="og:url" content="https://planckzgh.github.io/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="Tmux简明教程  参考资料：可能是东半球最全面易懂的 Tmux 使用教程！( 强烈建议收藏 )  Tmux简介  会话：用户在终端窗口(进程)中输入命令进行交互，称为一次会话； Tmux就是会话与窗口的解绑工具。  基本操作 1. 前缀键：ctrl+b  + 方向键：切换窗格 + alt 方向键：调整窗格大小 + n：切换窗口 + s （+ 方向键）：列出所有会话（显示分支结构） + x：关闭当">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://planckzgh.github.io/img/bg1.jpg">
+<meta property="article:published_time" content="2023-10-23T03:26:59.000Z">
+<meta property="article:modified_time" content="2024-03-31T12:25:00.000Z">
+<meta property="article:author" content="planckgh">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://planckzgh.github.io/img/bg1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tmux简明教程",
+  "url": "https://planckzgh.github.io/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/",
+  "image": "https://planckzgh.github.io/img/bg1.jpg",
+  "datePublished": "2023-10-23T03:26:59.000Z",
+  "dateModified": "2024-03-31T12:25:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "planckgh",
+      "url": "https://planckzgh.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Tmux简明教程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/bg1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/Planck.jpeg" alt="Logo"><span class="site-name">planckgh</span></a><a class="nav-page-title" href="/"><span class="site-name">Tmux简明教程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Tmux简明教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-23T03:26:59.000Z" title="发表于 2023-10-23 11:26:59">2023-10-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-31T12:25:00.000Z" title="更新于 2024-03-31 20:25:00">2024-03-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">483</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Tmux简明教程"><a href="#Tmux简明教程" class="headerlink" title="Tmux简明教程"></a>Tmux简明教程</h1><blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/easylife206/article/details/102713902">可能是东半球最全面易懂的 Tmux 使用教程！( 强烈建议收藏 )</a></p>
+</blockquote>
+<h2 id="Tmux简介"><a href="#Tmux简介" class="headerlink" title="Tmux简介"></a>Tmux简介</h2><ol>
+<li><p>会话：用户在终端窗口(进程)中输入命令进行交互，称为一次会话；</p>
+</li>
+<li><p>Tmux就是会话与窗口的解绑工具。</p>
+</li>
+</ol>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="1-前缀键：ctrl-b"><a href="#1-前缀键：ctrl-b" class="headerlink" title="1. 前缀键：ctrl+b"></a>1. 前缀键：<code>ctrl+b</code></h3><ol>
+<li><p><code>+ 方向键</code>：切换窗格</p>
+</li>
+<li><p><code>+ alt 方向键</code>：调整窗格大小</p>
+</li>
+<li><p><code>+ n</code>：切换窗口</p>
+</li>
+<li><p><code>+ s （+ 方向键）</code>：列出所有会话（显示分支结构）</p>
+</li>
+<li><p><code>+ x</code>：关闭当前窗格</p>
+</li>
+<li><p><code>+ z</code>：全屏当前窗格</p>
+</li>
+<li><p><code>+ d</code>：分离当前会话</p>
+</li>
+<li><p><code>+ q</code>：显示窗格编号tmux</p>
+</li>
+</ol>
+<h3 id="2-会话操作"><a href="#2-会话操作" class="headerlink" title="2. 会话操作"></a>2. 会话操作</h3><blockquote>
+<p>启动，退出，创建，接入，分离，查看，杀死，重命名，切换0</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tmux # 启动</span><br><span class="line">exit # 退出</span><br><span class="line">tmux new -s &lt;session-name&gt;</span><br><span class="line">tmux attach -t &lt;session-name&gt;</span><br><span class="line">tmux detach</span><br><span class="line">tmux ls</span><br><span class="line">tmux kill-session -t &lt;session-name&gt;</span><br><span class="line">tmux rename-session -t &lt;target-name&gt; &lt;new-name&gt;</span><br><span class="line">tmux switch-session -t &lt;session-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-窗格操作"><a href="#3-窗格操作" class="headerlink" title="3. 窗格操作"></a>3. 窗格操作</h3><blockquote>
+<p>新建，切换，划分，移动，交换</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tmux new-window -n &lt;window-name&gt;</span><br><span class="line">tmux select-window -t &lt;window-name&gt;</span><br><span class="line">tmux rename-window &lt;new-name&gt;</span><br><span class="line"></span><br><span class="line">tmux split-window    # up-down</span><br><span class="line">tmux split-window -h # left-right</span><br><span class="line"></span><br><span class="line">tmux select-pane -U  # up</span><br><span class="line">tmux select-pane -D  # down</span><br><span class="line">tmux select-pane -L  # left</span><br><span class="line">tmux select-pane -R  # right</span><br><span class="line"></span><br><span class="line">tmux swap-pane   -U  # -D -L -R</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-我的配置-tmux-conf"><a href="#4-我的配置-tmux-conf" class="headerlink" title="4. 我的配置.tmux.conf"></a>4. 我的配置<code>.tmux.conf</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">set -g mouse on # 鼠标滚动支持</span><br><span class="line">set -g default-terminal &quot;screen-256color&quot;</span><br><span class="line">set-option -ga terminal-overrides &quot;,*256col*:Tc&quot;</span><br><span class="line">set -g status-right &#x27;%H:%M:%S %b-%d %A&#x27;</span><br><span class="line">set -g status-interval 1 # 状态栏刷新时间</span><br><span class="line">set -g status-style bg=&#x27;#000000&#x27;,fg=white # 底部命令或者状态栏的颜色</span><br><span class="line">set  -g pane-active-border-style fg=red,bg=black # 设置正在使用的窗口的边界颜色，在不同窗口切换时边界颜色会变化</span><br><span class="line">set -sg escape-time 1</span><br><span class="line">set -g status-position bottom</span><br><span class="line">bind | split-window -h -c &#x27;#&#123;pane_current_path&#125;&#x27;</span><br><span class="line">bind - split-window -v -c &#x27;#&#123;pane_current_path&#125;&#x27;</span><br><span class="line">bind-key N run &quot;tmux new-window -c &#x27;#&#123;pane_current_path&#125;&#x27; -t $(($(tmux display-message -p &#x27;#I&#x27;) + 1))&quot;</span><br><span class="line">bind h select-pane -L</span><br><span class="line">bind j select-pane -D</span><br><span class="line">bind k select-pane -U</span><br><span class="line">bind l select-pane -R</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">https://planckzgh.github.io/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div><div class="post-share"><div class="social-share" data-image="/img/bg1.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/11/01/YSYX-PA0%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="YSYX-PA0学习记录"><img class="cover" src="https://ysyx.oscc.cc/res/images/logo/ysyx.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">YSYX-PA0学习记录</div></div><div class="info-2"><div class="info-item-1">YSYX-PA0学习记录 写下PA0重新复盘PA0的完成过程，查漏补缺  1 Ubuntu的安装由于之前使用的常常是windows系统，此处选择安装双系统，主要参考b站up阿杰的双系统安装教程，关键步骤如下：  使用rufus制作启动U盘；  磁盘分区尽量大一些；（如果选择方案二，根挂载点应当给到50GB以上）  注意系统的时间同步问题；   2 Ubuntu系统的配置 推荐安装一些常用软件：QQ，网易邮箱，Joplin，clash，onedrive，edge, sublime-text  1dpkg -i *.deb   简洁的配置vim和sublime  3 Linux的学习探索 学习资源：Linux101、HARLEY HAHN’S GUIDE TO UNIX AND LINUX、计算机教育中缺失的一课、C语言教程、笨办法学C，dotfiles仓库  3.1 常用命令 软件安装：sudo apt install file or *.deb  帮助文档  全面：man 快速：tldr   文件操作  查看：cat,less,head,tail 复制：cp 移动：mv 删除：r...</div></div></div></a><a class="pagination-related" href="/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="Joplin笔记恢复记录"><img class="cover" src="https://joplinapp.org/images/logo-text.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Joplin笔记恢复记录</div></div><div class="info-2"><div class="info-item-1">记一次Joplin笔记恢复记录1 原因更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。 2 找回方法2.1 确定现象打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin） 注意：此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，也算曾经对原路径改动过，Joplin仍然会忽略我们改回的路径，重新创建一个同步路径。 那我自己举例：  我将Joplin同步路径（Onedrive&#x2F;应用&#x2F;Joplin）不小心更改为（Onedrive&#x2F;Apps&#x2F;Joplin）。  在上述操作不知情时，我打开Joplin记笔记，Joplin会自动同步，找不到路径重新生成新路径（Onedrive&#x2F;应用&#x2F;Joplin），此时我发现同步笔记数据部分丢失。  于是我删除了Joplin重新创建的新路径（因为新路径的笔记数据不完整），将第一步操作重做（即，重新将Joplin同步路径...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/03/31/Git%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Git简明教程"><img class="cover" src="/img/bg1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="info-item-2">Git简明教程</div></div><div class="info-2"><div class="info-item-1"> 参考资料Git教程 git - 简明指南  个人项目的版本控制流 下载安装git，进行user.name和user.email的配置  12git config --global user.name &quot;Your Name&quot;git config --global user.email &quot;planckgh@gmail.com&quot;   完成ssh密钥配置  1ssh-keygen -t rsa -C &quot;planckgh@gmail.com&quot;   在本地工作目录新建git版本管理库  1git init   新建工作文件(test.c)  1vim test.c   添加改动文件至暂存区  1234# 单个文件git add test.c# 所有文件git add .   完成阶段性工作后，提交至HEAD  123456# 无改动提交git commit --allow-empty -m &quot;text&quot;# 改动提示不长git commit -m &quot;text&quot;# 改动提示较长git commi...</div></div></div></a><a class="pagination-related" href="/2023/11/08/Ubuntu22-04%E5%AE%89%E8%A3%85VCS2018%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Ubuntu22.04安装VCS2018踩坑记录"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="info-item-2">Ubuntu22.04安装VCS2018踩坑记录</div></div><div class="info-2"><div class="info-item-1"> 参考资料：VCS2018在Ubuntu20 18安装步骤、VCS compiling error issues - devindd、Ubuntu22.10安装VCS、Verdi  1 资源获取百度网盘链接  提取码：3pib  文件内容 libpng12.so.0：后面可能会需要这个包 scl_keygen_2030：这个是License生成器 scl_v2018.06：这个是SCL安装包，用来 synopsysinstaller_v5.0：这个是安装器 vcs_vO-2018.09-SP2：这个是vcs的安装包 verdi-2018.9：这个是verdi安装包    2 安装步骤2.1 建立安装路径，更改权限 建立图2的安装目录文件：Liscen用来存放license文件，SCL2018；vcs2018、verdi是对应的安装路径；vcs_install用来存放安装包好安装器。 2.2 运行安装器进行安装 进入synopsysinstaller_v5.0文件夹，运行./SynopsysInstaller_v5.0.run，会出现下面界面，提示选择安装器安装路径，直接在本路径下...</div></div></div></a><a class="pagination-related" href="/2023/11/08/Ubuntu22-04%E5%AE%89%E8%A3%85Questasim2021%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Ubuntu22-04安装Questasim2021踩坑记录"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-08</div><div class="info-item-2">Ubuntu22-04安装Questasim2021踩坑记录</div></div><div class="info-2"><div class="info-item-1">1 资源获取EETOP Questasim2021 2 安装步骤 安装依赖  123sudo apt install libxft2 libxft2:i386 lib32ncurses6sudo apt install libxext6sudo apt install libxext6:i386   获取license  1python2 mgclicgen.py &lt;hostid&gt;   安装questasim  1./questa_sim-2021.2_1.aol   复制文件pubkey_verify到安装目录下，然后执行  1./pubkey_verify -y  4, 配置环境变量，然后更新.bashrc 123export PATH=/path/to/questasim/linux_x86_64:$PATHexport PATH=/path/to/questasim/RUVM_2021.2:$PATHexport LM_LICENSE_FILE=/path/to/license.dat:$LM_LICENSE_FILE  3 补充说明 &lt;hostid&g...</div></div></div></a><a class="pagination-related" href="/2023/12/19/win11%E4%B8%8Bwsl2%E6%90%AD%E5%BB%BAvcs2016-verdi%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%95%99%E7%A8%8B/" title="win11下wsl2搭建vcs2016+verdi开发环境教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-19</div><div class="info-item-2">win11下wsl2搭建vcs2016+verdi开发环境教程</div></div><div class="info-2"><div class="info-item-1">win11下wsl2搭建vcs2016+verdi开发环境教程1 资源获取链接：https://pan.baidu.com/s/1SFCxy1CGoOGlp2gwk9imRw 提取码：1234 下载完成后拷贝进wsl2中  2 安装方法2.1 具体安装步骤1234567891011121314151617181920212223242526272829303132333435363738394041424344# 1. 创建安装目录$ mkdir vcs2016 verdi2016 scl_v11.9# 2. 解压SynopsysInstaller.rar$ unrar x SynopsysInstaller.rar# 3. 执行SynopsysInstaller_v3.3.run安装vcs、scl和verdi的安装器$ chmod 777 SynopsysInstaller_v3.3.run$ ./SynopsysInstaller_v3.3.run$ Please specify installation directory [.]: ./# 4. 安装csh$ sudo a...</div></div></div></a><a class="pagination-related" href="/2023/11/19/Mermaid%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Mermaid简明教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-19</div><div class="info-item-2">Mermaid简明教程</div></div><div class="info-2"><div class="info-item-1"> 使用教程：从入门到精通 Mermaid 是一种使用文本生成流程图、饼状图、甘特图等图表的描述语言，它可以帮助用户以简单、直观的方式创建各种类型的图表，包括流程图、时序图、甘特图等。  1 如何使用 Mermaid？ 在 HTML 或 Markdown 文件中引用 Mermaid 库和 Mermaid CSS 样式表。 使用 Mermaid 的 CLI 工具在命令行中生成图表，或使用 Mermaid 的 API 在自己的应用程序中生成图表。  具体而言，  如果只是轻量级、偶尔使用，推荐 Mermaid 在线渲染编辑器——Mermaid Live Editor 推荐使用 Markdown 编辑器，比如 Typora，Joplin. 一些兼容 Markdown 语法，支持 Mermaid Code 的现代编辑器，比如 FlowUs 息流. 流程图工具均支持 Mermaid 语法进行程序绘图。比如，VisionOn. 更多内容，推荐阅读 Mermaid 官方文档。  2 Mermaid 支持哪些类型的图表？ 流程图（Flowchart）：展示过程、决策和操作流程。  序列图（Sequ...</div></div></div></a><a class="pagination-related" href="/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Vimium简明教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="info-item-2">Vimium简明教程</div></div><div class="info-2"><div class="info-item-1">Vimium简明教程0. ? Show help1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL j   Scroll down k   Scroll up d		Scroll a half page down u		Scroll a half page up h		Scroll left l		Scroll right gg	Scroll to the top of the page G		Scroll to the bottom of the page zH	Scroll all the way to the left zL	Scroll all the way to the right m		Create a new mark &#96;	Go to a mark  2. 刷新页面：r,x,X r   Reload the page x		Close current tab X		Restore closed tab  3. 创建页面：p,P,gu,gU,ge,gE,t,yt p		Open the clipboard’s URL in the current...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">planckgh</div><div class="author-info-description">学习记录与分享</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">有任何建议欢迎使用邮件与我联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Tmux简明教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tmux%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Tmux简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E7%BC%80%E9%94%AE%EF%BC%9Actrl-b"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 前缀键：ctrl+b</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BC%9A%E8%AF%9D%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 会话操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AA%97%E6%A0%BC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 窗格操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE-tmux-conf"><span class="toc-number">1.2.4.</span> <span class="toc-text">4. 我的配置.tmux.conf</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录">🦐 Joplin笔记恢复记录</a><time datetime="2024-12-10T09:17:03.000Z" title="发表于 2024-12-10 17:17:03">2024-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用工具合集"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集">常用工具合集</a><time datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gdb简明教程"/></a><div class="content"><a class="title" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程">gdb简明教程</a><time datetime="2024-08-06T06:18:12.000Z" title="发表于 2024-08-06 14:18:12">2024-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字IC试题"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题">数字IC试题</a><time datetime="2024-07-29T16:18:39.000Z" title="发表于 2024-07-30 00:18:39">2024-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无毛刺时钟切换电路"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路">无毛刺时钟切换电路</a><time datetime="2024-07-29T16:10:00.000Z" title="发表于 2024-07-30 00:10:00">2024-07-30</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By planckgh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

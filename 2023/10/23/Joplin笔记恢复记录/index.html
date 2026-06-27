@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Joplin笔记恢复记录 | planckgh</title><meta name="author" content="planckgh"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记一次Joplin笔记恢复记录 1 原因 更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。 2 找回方法 2.1 确定现象 打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin） 注意：此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Joplin笔记恢复记录">
+<meta property="og:url" content="https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="记一次Joplin笔记恢复记录 1 原因 更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。 2 找回方法 2.1 确定现象 打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin） 注意：此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://joplinapp.org/images/logo-text.svg">
+<meta property="article:published_time" content="2023-10-23T02:03:30.000Z">
+<meta property="article:modified_time" content="2024-03-24T10:55:18.000Z">
+<meta property="article:author" content="planckgh">
+<meta property="article:tag" content="记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://joplinapp.org/images/logo-text.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Joplin笔记恢复记录",
+  "url": "https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/",
+  "image": "https://joplinapp.org/images/logo-text.svg",
+  "datePublished": "2023-10-23T02:03:30.000Z",
+  "dateModified": "2024-03-24T10:55:18.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "planckgh",
+      "url": "https://planckzgh.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Joplin笔记恢复记录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://joplinapp.org/images/logo-text.svg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/Planck.jpeg" alt="Logo"><span class="site-name">planckgh</span></a><a class="nav-page-title" href="/"><span class="site-name">Joplin笔记恢复记录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Joplin笔记恢复记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-23T02:03:30.000Z" title="发表于 2023-10-23 10:03:30">2023-10-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-24T10:55:18.000Z" title="更新于 2024-03-24 18:55:18">2024-03-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">582</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="记一次Joplin笔记恢复记录"><a href="#记一次Joplin笔记恢复记录" class="headerlink" title="记一次Joplin笔记恢复记录"></a>记一次Joplin笔记恢复记录</h1><h2 id="1-原因"><a href="#1-原因" class="headerlink" title="1 原因"></a>1 原因</h2><p>更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。</p>
+<h2 id="2-找回方法"><a href="#2-找回方法" class="headerlink" title="2 找回方法"></a>2 找回方法</h2><h3 id="2-1-确定现象"><a href="#2-1-确定现象" class="headerlink" title="2.1 确定现象"></a>2.1 确定现象</h3><p>打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin）</p>
+<p><strong>注意</strong>：此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，也算曾经对原路径改动过，Joplin仍然会忽略我们改回的路径，重新创建一个同步路径。</p>
+<p>那我自己举例：</p>
+<ol>
+<li><p>我将Joplin同步路径（Onedrive&#x2F;应用&#x2F;Joplin）不小心更改为（Onedrive&#x2F;Apps&#x2F;Joplin）。</p>
+</li>
+<li><p>在上述操作不知情时，我打开Joplin记笔记，Joplin会自动同步，找不到路径重新生成新路径（Onedrive&#x2F;应用&#x2F;Joplin），此时我发现同步笔记数据部分丢失。</p>
+</li>
+<li><p>于是我删除了Joplin重新创建的新路径（因为新路径的笔记数据不完整），将第一步操作重做（即，重新将Joplin同步路径更改为Onedrive&#x2F;应用&#x2F;Joplin）</p>
+</li>
+<li><p>此时，我再次打开Joplin，发现Joplin似乎不认识原路径，自动同步状态下重新创建了新路径（Onedrive&#x2F;应用 1&#x2F;Joplin）</p>
+</li>
+</ol>
+<h3 id="2-2-解决方案"><a href="#2-2-解决方案" class="headerlink" title="2.2 解决方案"></a>2.2 解决方案</h3><p>利用Joplin同步一共分为五个步骤。</p>
+<ol>
+<li><p>备份Joplin笔记数据。</p>
+</li>
+<li><p>清空Onedrive中Joplin的同步路径（无论是Joplin的原始同步路径，还是Joplin后来创建的新的同步路径）。</p>
+</li>
+<li><p>打开Joplin，等待Joplin同步完成，自动创建同步路径（Onedrive&#x2F;应用&#x2F;Joplin），<strong>不要</strong>关闭Joplin软件。</p>
+</li>
+<li><p>删除（Onedrive&#x2F;应用）路径下的Joplin文件夹，更换为第一步已备份的Joplin文件夹。</p>
+</li>
+<li><p>点击Joplin软件菜单栏的工具–&gt;选项–&gt;同步–&gt;显示高级选项–&gt;重新上传本地数据到同步目标–&gt;确定，等待Joplin上传本地项目。此时，Joplin笔记数据会慢慢恢复。</p>
+</li>
+</ol>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h2><p>经此一次，我得出教训，Joplin同步路径最好不要乱动，对于平日在Joplin记录的重要内容要定期定时进行多端（手机端，电脑端、平板端和网页端）同步。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/">https://planckzgh.github.io/2023/10/23/Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%B0%E5%BD%95/">记录</a></div><div class="post-share"><div class="social-share" data-image="https://joplinapp.org/images/logo-text.svg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Tmux简明教程"><img class="cover" src="/img/bg1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Tmux简明教程</div></div><div class="info-2"><div class="info-item-1">Tmux简明教程 参考资料：可能是东半球最全面易懂的 Tmux 使用教程！( 强烈建议收藏 )  Tmux简介 会话：用户在终端窗口(进程)中输入命令进行交互，称为一次会话；  Tmux就是会话与窗口的解绑工具。   基本操作1. 前缀键：ctrl+b + 方向键：切换窗格  + alt 方向键：调整窗格大小  + n：切换窗口  + s （+ 方向键）：列出所有会话（显示分支结构）  + x：关闭当前窗格  + z：全屏当前窗格  + d：分离当前会话  + q：显示窗格编号tmux   2. 会话操作 启动，退出，创建，接入，分离，查看，杀死，重命名，切换0  123456789tmux # 启动exit # 退出tmux new -s &lt;session-name&gt;tmux attach -t &lt;session-name&gt;tmux detachtmux lstmux kill-session -t &lt;session-name&gt;tmux rename-session -t &lt;target-name&gt; &lt;new-name&gt...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/12/03/%E4%BB%8EUbuntu%E7%B3%BB%E7%BB%9F%E5%88%B0WSL2/" title="从Ubuntu真机到WSL2"><img class="cover" src="https://assets.ubuntu.com/v1/411e1474-releases-lockup.svg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-03</div><div class="info-item-2">从Ubuntu真机到WSL2</div></div><div class="info-2"><div class="info-item-1">从Ubuntu真机到WSL2 记录一次被迫从Ubuntu22.04真机系统迁移到WSL2-Ubuntu22.04虚拟子系统的经历； 原因是运行vcs需要gcc4.8.5，与ysyx项目产生冲突，导致ysyx项目无法编译（动态库链接版本问题），使得真机无法继续进行该项目，于是使用wsl2继续进行ysyx，使用win11平台进行verification，好处是两者均位于同一个系统，使用起来切换自如。且win11系统使用体验确实好于Ubuntu系统，拥有丰富的软件支持。  1 WSL2的启用和Ubuntu的安装 手动启用HyperV  管理员权限打开PowerShell，并运行，以启用虚拟子系统和虚拟化平台；并将wsl默认设置为wsl2   123dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestartdism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /no...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">planckgh</div><div class="author-info-description">学习记录与分享</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">有任何建议欢迎使用邮件与我联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B0%E4%B8%80%E6%AC%A1Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">记一次Joplin笔记恢复记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">1 原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%89%BE%E5%9B%9E%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">2 找回方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%A1%AE%E5%AE%9A%E7%8E%B0%E8%B1%A1"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 确定现象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">3 总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录">🦐 Joplin笔记恢复记录</a><time datetime="2024-12-10T09:17:03.000Z" title="发表于 2024-12-10 17:17:03">2024-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用工具合集"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集">常用工具合集</a><time datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gdb简明教程"/></a><div class="content"><a class="title" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程">gdb简明教程</a><time datetime="2024-08-06T06:18:12.000Z" title="发表于 2024-08-06 14:18:12">2024-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字IC试题"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题">数字IC试题</a><time datetime="2024-07-29T16:18:39.000Z" title="发表于 2024-07-30 00:18:39">2024-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无毛刺时钟切换电路"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路">无毛刺时钟切换电路</a><time datetime="2024-07-29T16:10:00.000Z" title="发表于 2024-07-30 00:10:00">2024-07-30</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By planckgh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vimium简明教程 | planckgh</title><meta name="author" content="planckgh"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Vimium简明教程 0. ? Show help 1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL  j   Scroll down k   Scroll up d		Scroll a half page down u		Scroll a half page up h		Scroll left l		Scroll right gg	Scroll to the top of the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vimium简明教程">
+<meta property="og:url" content="https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="Vimium简明教程 0. ? Show help 1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL  j   Scroll down k   Scroll up d		Scroll a half page down u		Scroll a half page up h		Scroll left l		Scroll right gg	Scroll to the top of the">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7">
+<meta property="article:published_time" content="2024-01-31T04:57:15.000Z">
+<meta property="article:modified_time" content="2024-01-31T05:42:12.000Z">
+<meta property="article:author" content="planckgh">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vimium简明教程",
+  "url": "https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/",
+  "image": "https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7",
+  "datePublished": "2024-01-31T04:57:15.000Z",
+  "dateModified": "2024-01-31T05:42:12.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "planckgh",
+      "url": "https://planckzgh.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vimium简明教程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/Planck.jpeg" alt="Logo"><span class="site-name">planckgh</span></a><a class="nav-page-title" href="/"><span class="site-name">Vimium简明教程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Vimium简明教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-31T04:57:15.000Z" title="发表于 2024-01-31 12:57:15">2024-01-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-31T05:42:12.000Z" title="更新于 2024-01-31 13:42:12">2024-01-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">395</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Vimium简明教程"><a href="#Vimium简明教程" class="headerlink" title="Vimium简明教程"></a>Vimium简明教程</h1><h2 id="0-Show-help"><a href="#0-Show-help" class="headerlink" title="0. ? Show help"></a>0. ? Show help</h2><h2 id="1-滚动跳转-j-k-d-u-h-l-gg-G-zH-zL"><a href="#1-滚动跳转-j-k-d-u-h-l-gg-G-zH-zL" class="headerlink" title="1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL"></a>1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL</h2><ul>
+<li>j   Scroll down</li>
+<li>k   Scroll up</li>
+<li>d		Scroll a half page down</li>
+<li>u		Scroll a half page up</li>
+<li>h		Scroll left</li>
+<li>l		Scroll right</li>
+<li>gg	Scroll to the top of the page</li>
+<li>G		Scroll to the bottom of the page</li>
+<li>zH	Scroll all the way to the left</li>
+<li>zL	Scroll all the way to the right</li>
+<li>m		Create a new mark</li>
+<li>&#96;	Go to a mark</li>
+</ul>
+<h2 id="2-刷新页面：r-x-X"><a href="#2-刷新页面：r-x-X" class="headerlink" title="2. 刷新页面：r,x,X"></a>2. 刷新页面：r,x,X</h2><ul>
+<li>r   Reload the page</li>
+<li>x		Close current tab</li>
+<li>X		Restore closed tab</li>
+</ul>
+<h2 id="3-创建页面：p-P-gu-gU-ge-gE-t-yt"><a href="#3-创建页面：p-P-gu-gU-ge-gE-t-yt" class="headerlink" title="3. 创建页面：p,P,gu,gU,ge,gE,t,yt"></a>3. 创建页面：p,P,gu,gU,ge,gE,t,yt</h2><ul>
+<li>p		Open the clipboard’s URL in the current tab</li>
+<li>P		Open the clipboard’s URL in a new tab</li>
+<li>gu	Go up the URL hierarchy</li>
+<li>gU	Go to root of current URL hierarchy</li>
+<li>ge	Edit the current URL</li>
+<li>gE	Edit the current URL and open in a new tab</li>
+<li>t		Create new tab</li>
+<li>yt	Duplicate current tab</li>
+</ul>
+<h2 id="4-点击链接：f-F"><a href="#4-点击链接：f-F" class="headerlink" title="4. 点击链接：f,F"></a>4. 点击链接：f,F</h2><ul>
+<li>f		Open a link in the current tab</li>
+<li>F		Open a link in a new tab</li>
+</ul>
+<h2 id="5-复制内容：yy-yf-v-V"><a href="#5-复制内容：yy-yf-v-V" class="headerlink" title="5. 复制内容：yy,yf,v,V"></a>5. 复制内容：yy,yf,v,V</h2><ul>
+<li>yy	Copy the current URL to the clipboard</li>
+<li>yf	Copy a link URL to the clipboard</li>
+<li>v		Enter visual mode</li>
+<li>V		Enter visual line mode</li>
+</ul>
+<h2 id="6-搜索内容：-n-N-o-O-b-B-T"><a href="#6-搜索内容：-n-N-o-O-b-B-T" class="headerlink" title="6. 搜索内容：&#x2F;,n,N,o,O,b,B,T"></a>6. 搜索内容：&#x2F;,n,N,o,O,b,B,T</h2><ul>
+<li>&#x2F;		Enter find mode</li>
+<li>n		Cycle forward to the next find match</li>
+<li>N		Cycle backward to the previous find match</li>
+<li>o		Open URL, bookmark or history entry</li>
+<li>O		Open URL, bookmark or history entry in a new tab</li>
+<li>b		Open a bookmark</li>
+<li>B		Open a bookmark in a new tab</li>
+<li>T		Search through your open tabs</li>
+</ul>
+<h2 id="7-切换页面：J-K-g0-g-H-L"><a href="#7-切换页面：J-K-g0-g-H-L" class="headerlink" title="7. 切换页面：J,K,^,g0,g$,H,L"></a>7. 切换页面：J,K,^,g0,g$,H,L</h2><ul>
+<li>J, 	Go one tab left</li>
+<li>K, 	Go one tab right</li>
+<li>^		Go to previously-visited tab</li>
+<li>g0	Go to the first tab</li>
+<li>g$	Go to the last tab</li>
+<li>H		Go back in history</li>
+<li>L		Go forward in history</li>
+</ul>
+<h2 id="8-移动页面：W"><a href="#8-移动页面：W" class="headerlink" title="8. 移动页面：W,&lt;&lt;,&gt;&gt;"></a>8. 移动页面：W,&lt;&lt;,&gt;&gt;</h2><ul>
+<li>W	  	Move tab to new window</li>
+<li>&lt;&lt;		Move tab to the left</li>
+<li><blockquote>
+<blockquote>
+<p>Move tab to the right</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h2 id="9-其他操作："><a href="#9-其他操作：" class="headerlink" title="9. 其他操作："></a>9. 其他操作：</h2><ul>
+<li><alt-p>		Pin or unpin current tab</li>
+<li><alt-m>		Mute or unmute current tab</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">https://planckzgh.github.io/2024/01/31/Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div><div class="post-share"><div class="social-share" data-image="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/02/01/%E3%80%90VIM%E3%80%91Verilog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="【VIM】Verilog开发环境配置"><img class="cover" src="/img/bg1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【VIM】Verilog开发环境配置</div></div><div class="info-2"><div class="info-item-1">【VIM】Verilog开发环境配置代码补全 snippets  自动例化 automatic-verilog  代码格式化 tabular  语法检查 ale (linter:verilator)  </div></div></div></a><a class="pagination-related" href="/2024/01/16/%E3%80%90vivado%E3%80%91VIO%E5%92%8CILA%E8%81%94%E5%90%88%E8%B0%83%E8%AF%95%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="【vivado】VIO和ILA联合调试小技巧"><img class="cover" src="https://th.bing.com/th?id=OSK.pzQDpRxzW0uHoppSlhjDAQe4O4c-t04wirhxGvZEoyk&amp;w=188&amp;h=132&amp;c=7&amp;o=6&amp;pid=SANGAM" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【vivado】VIO和ILA联合调试小技巧</div></div><div class="info-2"><div class="info-item-1">Vivado中VIO IP核的使用理解相对于ILA更多的关注波形，VIO则专注于输入和输出关系的描述。个人理解为VIO就是一个便携测试，可以根据输入测试输出。类似于开关和LED仿真，相当于在数字电路中加入LED（输入）和开关(输出）。 配置    联调  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/03/31/LaTex%E6%8E%92%E7%89%88%E7%AC%94%E8%AE%B0/" title="LaTex排版笔记"><img class="cover" src="/img/bg1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="info-item-2">LaTex排版笔记</div></div><div class="info-2"><div class="info-item-1">LaTeX\LaTeXLATE​X 排版笔记1. 习惯篇： 不引用\ref不标记\label 参考文献及时引用\cite 数据尽量以Excel形式保存  2. 宏包篇： 数学宏包：amsmath 表格宏包：booktabs 图片宏包：graphicx 颜色宏包：color &amp; xcolor 代码宏包：listings  3. 表格篇： 在线LaTeX表格生成器 表格转换器 Excel插件（LaTeX表格转换器）：GitHub项目地址 LaTex表格常用命令： 合并单元格：\multicolumn&#123;2&#125;&#123;c&#125;&#123;文字&#125;，\multirow&#123;2&#125;&#123;*&#125;&#123;&#125; 划线：\cline&#123;2-3&#125; 表格底色设置：宏包：\usepackage&#123;colortbl&#125;环境：\begin&#123;tabular&#125;\end&#123;tabular&#125;命令：\rowcolor&#123;颜色&#125;：用于行开头，为整行设...</div></div></div></a><a class="pagination-related" href="/2023/12/19/win11%E4%B8%8Bwsl2%E6%90%AD%E5%BB%BAvcs2016-verdi%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%95%99%E7%A8%8B/" title="win11下wsl2搭建vcs2016+verdi开发环境教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-19</div><div class="info-item-2">win11下wsl2搭建vcs2016+verdi开发环境教程</div></div><div class="info-2"><div class="info-item-1">win11下wsl2搭建vcs2016+verdi开发环境教程1 资源获取链接：https://pan.baidu.com/s/1SFCxy1CGoOGlp2gwk9imRw 提取码：1234 下载完成后拷贝进wsl2中  2 安装方法2.1 具体安装步骤1234567891011121314151617181920212223242526272829303132333435363738394041424344# 1. 创建安装目录$ mkdir vcs2016 verdi2016 scl_v11.9# 2. 解压SynopsysInstaller.rar$ unrar x SynopsysInstaller.rar# 3. 执行SynopsysInstaller_v3.3.run安装vcs、scl和verdi的安装器$ chmod 777 SynopsysInstaller_v3.3.run$ ./SynopsysInstaller_v3.3.run$ Please specify installation directory [.]: ./# 4. 安装csh$ sudo a...</div></div></div></a><a class="pagination-related" href="/2023/11/19/Mermaid%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Mermaid简明教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-19</div><div class="info-item-2">Mermaid简明教程</div></div><div class="info-2"><div class="info-item-1"> 使用教程：从入门到精通 Mermaid 是一种使用文本生成流程图、饼状图、甘特图等图表的描述语言，它可以帮助用户以简单、直观的方式创建各种类型的图表，包括流程图、时序图、甘特图等。  1 如何使用 Mermaid？ 在 HTML 或 Markdown 文件中引用 Mermaid 库和 Mermaid CSS 样式表。 使用 Mermaid 的 CLI 工具在命令行中生成图表，或使用 Mermaid 的 API 在自己的应用程序中生成图表。  具体而言，  如果只是轻量级、偶尔使用，推荐 Mermaid 在线渲染编辑器——Mermaid Live Editor 推荐使用 Markdown 编辑器，比如 Typora，Joplin. 一些兼容 Markdown 语法，支持 Mermaid Code 的现代编辑器，比如 FlowUs 息流. 流程图工具均支持 Mermaid 语法进行程序绘图。比如，VisionOn. 更多内容，推荐阅读 Mermaid 官方文档。  2 Mermaid 支持哪些类型的图表？ 流程图（Flowchart）：展示过程、决策和操作流程。  序列图（Sequ...</div></div></div></a><a class="pagination-related" href="/2023/10/23/Tmux%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Tmux简明教程"><img class="cover" src="/img/bg1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-23</div><div class="info-item-2">Tmux简明教程</div></div><div class="info-2"><div class="info-item-1">Tmux简明教程 参考资料：可能是东半球最全面易懂的 Tmux 使用教程！( 强烈建议收藏 )  Tmux简介 会话：用户在终端窗口(进程)中输入命令进行交互，称为一次会话；  Tmux就是会话与窗口的解绑工具。   基本操作1. 前缀键：ctrl+b + 方向键：切换窗格  + alt 方向键：调整窗格大小  + n：切换窗口  + s （+ 方向键）：列出所有会话（显示分支结构）  + x：关闭当前窗格  + z：全屏当前窗格  + d：分离当前会话  + q：显示窗格编号tmux   2. 会话操作 启动，退出，创建，接入，分离，查看，杀死，重命名，切换0  123456789tmux # 启动exit # 退出tmux new -s &lt;session-name&gt;tmux attach -t &lt;session-name&gt;tmux detachtmux lstmux kill-session -t &lt;session-name&gt;tmux rename-session -t &lt;target-name&gt; &lt;new-name&gt...</div></div></div></a><a class="pagination-related" href="/2024/03/31/Git%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Git简明教程"><img class="cover" src="/img/bg1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="info-item-2">Git简明教程</div></div><div class="info-2"><div class="info-item-1"> 参考资料Git教程 git - 简明指南  个人项目的版本控制流 下载安装git，进行user.name和user.email的配置  12git config --global user.name &quot;Your Name&quot;git config --global user.email &quot;planckgh@gmail.com&quot;   完成ssh密钥配置  1ssh-keygen -t rsa -C &quot;planckgh@gmail.com&quot;   在本地工作目录新建git版本管理库  1git init   新建工作文件(test.c)  1vim test.c   添加改动文件至暂存区  1234# 单个文件git add test.c# 所有文件git add .   完成阶段性工作后，提交至HEAD  123456# 无改动提交git commit --allow-empty -m &quot;text&quot;# 改动提示不长git commit -m &quot;text&quot;# 改动提示较长git commi...</div></div></div></a><a class="pagination-related" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img class="cover" src="/img/bg1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-06</div><div class="info-item-2">gdb简明教程</div></div><div class="info-2"><div class="info-item-1">make gdb x：扫描内存 b：设置断点 c：继续执行程序 r：重新开始执行程序 s：单步执行且进入函数 n：单步执行但不进入函数 p：打印变量或寄存器的值 bt：查看调用栈 watch：设置监视点 finish：跳出当前函数 layout src：查看源代码 layout split：查看汇编代码 ctrl + p / n：回溯历史命令 help xxx：查看xxx命令的帮助  </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">planckgh</div><div class="author-info-description">学习记录与分享</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">有任何建议欢迎使用邮件与我联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vimium%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Vimium简明教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-Show-help"><span class="toc-number">1.1.</span> <span class="toc-text">0. ? Show help</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%BB%9A%E5%8A%A8%E8%B7%B3%E8%BD%AC-j-k-d-u-h-l-gg-G-zH-zL"><span class="toc-number">1.2.</span> <span class="toc-text">1. 滚动跳转: j,k,d,u,h,l,gg,G,zH,zL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2%EF%BC%9Ar-x-X"><span class="toc-number">1.3.</span> <span class="toc-text">2. 刷新页面：r,x,X</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E9%A1%B5%E9%9D%A2%EF%BC%9Ap-P-gu-gU-ge-gE-t-yt"><span class="toc-number">1.4.</span> <span class="toc-text">3. 创建页面：p,P,gu,gU,ge,gE,t,yt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%82%B9%E5%87%BB%E9%93%BE%E6%8E%A5%EF%BC%9Af-F"><span class="toc-number">1.5.</span> <span class="toc-text">4. 点击链接：f,F</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A4%8D%E5%88%B6%E5%86%85%E5%AE%B9%EF%BC%9Ayy-yf-v-V"><span class="toc-number">1.6.</span> <span class="toc-text">5. 复制内容：yy,yf,v,V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%90%9C%E7%B4%A2%E5%86%85%E5%AE%B9%EF%BC%9A-n-N-o-O-b-B-T"><span class="toc-number">1.7.</span> <span class="toc-text">6. 搜索内容：&#x2F;,n,N,o,O,b,B,T</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%EF%BC%9AJ-K-g0-g-H-L"><span class="toc-number">1.8.</span> <span class="toc-text">7. 切换页面：J,K,^,g0,g$,H,L</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%A7%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2%EF%BC%9AW"><span class="toc-number">1.9.</span> <span class="toc-text">8. 移动页面：W,&lt;&lt;,&gt;&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.10.</span> <span class="toc-text">9. 其他操作：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录">🦐 Joplin笔记恢复记录</a><time datetime="2024-12-10T09:17:03.000Z" title="发表于 2024-12-10 17:17:03">2024-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用工具合集"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集">常用工具合集</a><time datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gdb简明教程"/></a><div class="content"><a class="title" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程">gdb简明教程</a><time datetime="2024-08-06T06:18:12.000Z" title="发表于 2024-08-06 14:18:12">2024-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字IC试题"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题">数字IC试题</a><time datetime="2024-07-29T16:18:39.000Z" title="发表于 2024-07-30 00:18:39">2024-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无毛刺时钟切换电路"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路">无毛刺时钟切换电路</a><time datetime="2024-07-29T16:10:00.000Z" title="发表于 2024-07-30 00:10:00">2024-07-30</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By planckgh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
