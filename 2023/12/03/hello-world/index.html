@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hello World | planckgh</title><meta name="author" content="planckgh"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="https://planckzgh.github.io/2023/12/03/hello-world/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://th.bing.com/th/id/OIP.6lSlWkB4J6arLCEnMrsSRAHaBw?w=321&h=82&c=7&r=0&o=5&pid=1.7">
+<meta property="article:published_time" content="2023-12-03T06:21:17.000Z">
+<meta property="article:modified_time" content="2023-12-03T07:38:49.000Z">
+<meta property="article:author" content="planckgh">
+<meta property="article:tag" content="其他">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://th.bing.com/th/id/OIP.6lSlWkB4J6arLCEnMrsSRAHaBw?w=321&h=82&c=7&r=0&o=5&pid=1.7"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hello World",
+  "url": "https://planckzgh.github.io/2023/12/03/hello-world/",
+  "image": "https://th.bing.com/th/id/OIP.6lSlWkB4J6arLCEnMrsSRAHaBw?w=321&h=82&c=7&r=0&o=5&pid=1.7",
+  "datePublished": "2023-12-03T06:21:17.000Z",
+  "dateModified": "2023-12-03T07:38:49.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "planckgh",
+      "url": "https://planckzgh.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2023/12/03/hello-world/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hello World',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://th.bing.com/th/id/OIP.6lSlWkB4J6arLCEnMrsSRAHaBw?w=321&amp;h=82&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/Planck.jpeg" alt="Logo"><span class="site-name">planckgh</span></a><a class="nav-page-title" href="/"><span class="site-name">Hello World</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Hello World</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-03T06:21:17.000Z" title="发表于 2023-12-03 14:21:17">2023-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-03T07:38:49.000Z" title="更新于 2023-12-03 15:38:49">2023-12-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">80</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2023/12/03/hello-world/#post-comment"><span class="gitalk-comment-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="Choose-a-theme"><a href="#Choose-a-theme" class="headerlink" title="Choose a theme"></a>Choose a theme</h3><p>Such as <a target="_blank" rel="noopener" href="https://butterfly.js.org/">Butterfly</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2023/12/03/hello-world/">https://planckzgh.github.io/2023/12/03/hello-world/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%85%B6%E4%BB%96/">其他</a></div><div class="post-share"><div class="social-share" data-image="https://th.bing.com/th/id/OIP.6lSlWkB4J6arLCEnMrsSRAHaBw?w=321&amp;h=82&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/12/03/%E4%BB%8EUbuntu%E7%B3%BB%E7%BB%9F%E5%88%B0WSL2/" title="从Ubuntu真机到WSL2"><img class="cover" src="https://assets.ubuntu.com/v1/411e1474-releases-lockup.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">从Ubuntu真机到WSL2</div></div><div class="info-2"><div class="info-item-1">从Ubuntu真机到WSL2 记录一次被迫从Ubuntu22.04真机系统迁移到WSL2-Ubuntu22.04虚拟子系统的经历； 原因是运行vcs需要gcc4.8.5，与ysyx项目产生冲突，导致ysyx项目无法编译（动态库链接版本问题），使得真机无法继续进行该项目，于是使用wsl2继续进行ysyx，使用win11平台进行verification，好处是两者均位于同一个系统，使用起来切换自如。且win11系统使用体验确实好于Ubuntu系统，拥有丰富的软件支持。  1 WSL2的启用和Ubuntu的安装 手动启用HyperV  管理员权限打开PowerShell，并运行，以启用虚拟子系统和虚拟化平台；并将wsl默认设置为wsl2   123dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestartdism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /no...</div></div></div></a><a class="pagination-related" href="/2023/11/19/Mermaid%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="Mermaid简明教程"><img class="cover" src="https://th.bing.com/th/id/OIP.ADYbRwl9LPfobH6X-lf0qwHaFY?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Mermaid简明教程</div></div><div class="info-2"><div class="info-item-1"> 使用教程：从入门到精通 Mermaid 是一种使用文本生成流程图、饼状图、甘特图等图表的描述语言，它可以帮助用户以简单、直观的方式创建各种类型的图表，包括流程图、时序图、甘特图等。  1 如何使用 Mermaid？ 在 HTML 或 Markdown 文件中引用 Mermaid 库和 Mermaid CSS 样式表。 使用 Mermaid 的 CLI 工具在命令行中生成图表，或使用 Mermaid 的 API 在自己的应用程序中生成图表。  具体而言，  如果只是轻量级、偶尔使用，推荐 Mermaid 在线渲染编辑器——Mermaid Live Editor 推荐使用 Markdown 编辑器，比如 Typora，Joplin. 一些兼容 Markdown 语法，支持 Mermaid Code 的现代编辑器，比如 FlowUs 息流. 流程图工具均支持 Mermaid 语法进行程序绘图。比如，VisionOn. 更多内容，推荐阅读 Mermaid 官方文档。  2 Mermaid 支持哪些类型的图表？ 流程图（Flowchart）：展示过程、决策和操作流程。  序列图（Sequ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-10</div><div class="info-item-2">🦐 Joplin笔记恢复记录</div></div><div class="info-2"><div class="info-item-1">原因更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。 找回方法 确定现象：打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin）注意此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，也算曾经对原路径改动过，Joplin仍然会忽略我们改回的路径，重新创建一个同步路径。那我自己举例：  我将Joplin同步路径（Onedrive&#x2F;应用&#x2F;Joplin）不小心更改为（Onedrive&#x2F;Apps&#x2F;Joplin）。 在上述操作不知情时，我打开Joplin记笔记，Joplin会自动同步，找不到路径重新生成新路径（Onedrive&#x2F;应用&#x2F;Joplin），此时我发现同步笔记数据部分丢失。 于是我删除了Joplin重新创建的新路径（因为新路径的笔记数据不完整），将第一步操作重做（即，重新将Joplin同步路径更改为Onedrive&#x2F;应用&#x2F;J...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">planckgh</div><div class="author-info-description">学习记录与分享</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">有任何建议欢迎使用邮件与我联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Choose-a-theme"><span class="toc-number">1.5.</span> <span class="toc-text">Choose a theme</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录">🦐 Joplin笔记恢复记录</a><time datetime="2024-12-10T09:17:03.000Z" title="发表于 2024-12-10 17:17:03">2024-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用工具合集"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集">常用工具合集</a><time datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gdb简明教程"/></a><div class="content"><a class="title" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程">gdb简明教程</a><time datetime="2024-08-06T06:18:12.000Z" title="发表于 2024-08-06 14:18:12">2024-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字IC试题"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题">数字IC试题</a><time datetime="2024-07-29T16:18:39.000Z" title="发表于 2024-07-30 00:18:39">2024-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无毛刺时钟切换电路"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路">无毛刺时钟切换电路</a><time datetime="2024-07-29T16:10:00.000Z" title="发表于 2024-07-30 00:10:00">2024-07-30</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By planckgh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liiVokjVZA445OdC',
+      clientSecret: '046cbec5f91693430645dd360b7321d5057462e1',
+      repo: 'planckzgh.github.io',
+      owner: 'planckzgh',
+      admin: ['planckzgh'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'd5b59c79c4002f3c7484f9379f611afc'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

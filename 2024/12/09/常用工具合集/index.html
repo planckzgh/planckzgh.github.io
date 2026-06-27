@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>常用工具合集 | planckgh</title><meta name="author" content="planckgh"><meta name="copyright" content="planckgh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Tools vim Basic  单词的大小写转换： (visual mode)  &amp;  快速跳转：匹配括号之间跳转 % ，函数头尾跳转 [{ 历史位置跳转：   &#39;&#39; 启用折叠 zN，禁用折叠 zn ，开关折叠 za 根据路径跳转文件： gf 当需要多次copy而希望剪贴板不被visual模式选择的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用工具合集">
+<meta property="og:url" content="https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="planckgh">
+<meta property="og:description" content="Tools vim Basic  单词的大小写转换： (visual mode)  &amp;  快速跳转：匹配括号之间跳转 % ，函数头尾跳转 [{ 历史位置跳转：   &#39;&#39; 启用折叠 zN，禁用折叠 zn ，开关折叠 za 根据路径跳转文件： gf 当需要多次copy而希望剪贴板不被visual模式选择的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://planckzgh.github.io/img/bg1.jpg">
+<meta property="article:published_time" content="2024-12-09T09:17:03.000Z">
+<meta property="article:modified_time" content="2024-12-10T11:18:53.000Z">
+<meta property="article:author" content="planckgh">
+<meta property="article:tag" content="工作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://planckzgh.github.io/img/bg1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "常用工具合集",
+  "url": "https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/",
+  "image": "https://planckzgh.github.io/img/bg1.jpg",
+  "datePublished": "2024-12-09T09:17:03.000Z",
+  "dateModified": "2024-12-10T11:18:53.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "planckgh",
+      "url": "https://planckzgh.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/Planck.jpeg"><link rel="canonical" href="https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用工具合集',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="planckgh" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/bg1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/Planck.jpeg" alt="Logo"><span class="site-name">planckgh</span></a><a class="nav-page-title" href="/"><span class="site-name">常用工具合集</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">常用工具合集</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-10T11:18:53.000Z" title="更新于 2024-12-10 19:18:53">2024-12-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/#post-comment"><span class="gitalk-comment-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><ol>
+<li><p>单词的大小写转换： <code>(visual mode) &lt;U&gt; &amp; &lt;u&gt;</code></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021097211">快速跳转</a>：匹配括号之间跳转 <code>%</code> ，函数头尾跳转 <code>[&#123;</code></p>
+</li>
+<li><p>历史位置跳转： <code>&lt;C-o&gt;</code> <code>&lt;C-i&gt;</code> <code>&#39;&#39;</code></p>
+</li>
+<li><p>启用折叠 <code>zN</code>，禁用折叠 <code>zn</code> ，开关折叠 <code>za</code></p>
+</li>
+<li><p>根据路径跳转文件： <code>gf</code></p>
+</li>
+<li><p>当需要多次copy而希望剪贴板不被visual模式选择的新内容覆盖时，选用特殊寄存器存储copy的内容： <code>&quot;ay -&gt; v（选择被覆盖的内容） -&gt;&quot;ap -&gt; &quot;ap</code></p>
+</li>
+<li><p>标记语法 <code>m&#123;letter&#125;</code>，跳转语法 &#96;&#96;{letter}&#96;</p>
+<ul>
+<li><code>m[a-z]</code> - 小写字母的, 创建一个可以在当前文件(缓冲区)进行跳转的标签</li>
+<li><code>m[A-Z]</code> - 大写字母的, 创建一个可以全局的标签, 可以在多个文件之前跳转</li>
+</ul>
+</li>
+</ol>
+<h3 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h3><ol>
+<li><p>对齐：Tabular</p>
+</li>
+<li><p>补全：<a target="_blank" rel="noopener" href="https://wulc.me/2015/12/01/vim%E4%B8%ADSuperTab%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">SuperTab</a></p>
+</li>
+<li><p>跳转：ctags taglist 可拓展支持 SystemVerilog</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44966641/article/details/121942367">基本使用方法</a>：<code>ctags -R .</code></li>
+<li>vim配置： <code>set tags=./tags;/</code> <code>nnoremap &lt;space&gt;n g&lt;C-]&gt;</code></li>
+<li>systemverilog.ctags文件配置：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhajio/article/details/45014837">ctags for systemverilog</a>, <a target="_blank" rel="noopener" href="https://coderwall.com/p/fy7stg/vim-and-systemverilog">ctags config for systemverilog</a></li>
+</ul>
+</li>
+<li><p>跳转：<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=5494">vtags</a> 基于python强支持verilog&#x2F;systemverilog</p>
+</li>
+<li><p>文件树：<a target="_blank" rel="noopener" href="https://blog.csdn.net/somenzz/article/details/120735538">netrw</a></p>
+</li>
+<li><p>自动缩进：verilog_systemverilog.vim</p>
+</li>
+<li><p>其他自动化操作：<a target="_blank" rel="noopener" href="https://automatic-verilog.honk.wang/#/handbook?id=%E6%A0%91%E7%8A%B6%E6%8B%93%E6%89%91-rtltree">automatic-verilog</a></p>
+</li>
+</ol>
+<h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><ul>
+<li>删除含有指定pattern的行： <code>:g/pattern/d</code></li>
+<li>区分大小写替换操作： <code>:%s/\Ckey1/key2/g</code></li>
+</ul>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ol>
+<li><p>神的回答：<a target="_blank" rel="noopener" href="https://blog.csdn.net/j_sure/article/details/41014641">CentOS下vim无法使用”+y复制到剪贴板</a></p>
+</li>
+<li><p>vim 语法折叠巨慢，而且切换文件还会恢复折叠，打开大文件不建议使用</p>
+</li>
+</ol>
+<h1 id="linux三剑客"><a href="#linux三剑客" class="headerlink" title="linux三剑客"></a>linux三剑客</h1><h2 id="grep：过滤文本"><a href="#grep：过滤文本" class="headerlink" title="grep：过滤文本"></a>grep：过滤文本</h2><h3 id="Basic-1"><a href="#Basic-1" class="headerlink" title="Basic"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/LONG_Yi_1994/article/details/131051728">Basic</a></h3><ol>
+<li><p>文件查找：</p>
+</li>
+<li><p>文本查找：</p>
+</li>
+</ol>
+<h2 id="sed：修改文本"><a href="#sed：修改文本" class="headerlink" title="sed：修改文本"></a>sed：修改文本</h2><h3 id="Basic-2"><a href="#Basic-2" class="headerlink" title="Basic"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45206551/article/details/104498965">Basic</a></h3><h2 id="awk：处理文本"><a href="#awk：处理文本" class="headerlink" title="awk：处理文本"></a>awk：处理文本</h2><h3 id="Basic-3"><a href="#Basic-3" class="headerlink" title="Basic"></a><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/11/awk.html">Basic</a></h3><h2 id="verdi"><a href="#verdi" class="headerlink" title="verdi"></a>verdi</h2><h3 id="Basic-4"><a href="#Basic-4" class="headerlink" title="Basic"></a>Basic</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/cy413026/article/details/124653544#:~:text=%E9%A6%96%E5%85%88%E5%9C%A8%E8%8F%9C%E5%8D%95%E6%A0%8F%20%E7%82%B9%E5%87%BBview-%3EsignalList%E7%AA%97%E5%8F%A3%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E6%89%80%E6%9C%89%E4%BF%A1%E5%8F%B7%E4%BD%8D%E5%AE%BD%E9%83%BD%E6%98%AF%E6%95%B0%E5%AD%97%E7%9A%84%EF%BC%8C%E8%BF%87%E6%BB%A4%E5%87%BA%E8%87%AA%E5%B7%B1%E5%85%B3%E5%BF%83%E7%9A%84%E4%BF%A1%E5%8F%B7%EF%BC%8C%E9%80%89%E4%B8%AD%E8%BF%99%E4%BA%9B%E4%BF%A1%E5%8F%B7%E5%8F%B3%E9%94%AE-%3Esave%20selected%20signals%20to,file%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BF%9D%E5%AD%98%E4%B8%BA%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E3%80%82%202.%E5%B0%86%E6%9F%90%E4%B8%AAHierarchy%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%B1%82%E6%AC%A1%E5%AF%BC%E5%87%BA%20%E5%9C%A8instance%E7%AA%97%E5%8F%A3%E9%80%89%E6%8B%A9%E6%9F%90%E4%B8%80%E4%BE%8B%E5%8C%96%E5%B1%82%E6%AC%A1%EF%BC%8C%E5%8F%B3%E9%94%AE-%3E%20Export%20Hierarchy%E5%8D%B3%E5%8F%AF">verdi将rtl中参数信号位宽导出为数字&amp;导出rtl层次_verdi将信号数据存入文件-CSDN博客</a></li>
+</ul>
+<h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://bbs.eetop.cn/thread-856230-1-1.html">verdi_vL-2016.06-1百度网盘分享 - IC验证资料 - EETOP 创芯网论坛 (原名：电子顶级开发网) -</a></li>
+</ul>
+<h3 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h3><ul>
+<li><a href="novas.rc">novas.rc</a></li>
+</ul>
+<h3 id="Hotkeys"><a href="#Hotkeys" class="headerlink" title="Hotkeys"></a>Hotkeys</h3><ol>
+<li><p><code>h</code> 在波形窗口查看信号的完整路径</p>
+</li>
+<li><p><code>x</code> 在代码窗口查看信号的值和跳变</p>
+</li>
+<li><p><code>m</code> 在代码窗口查看宏的展开形式</p>
+</li>
+</ol>
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><h3 id="Basic-5"><a href="#Basic-5" class="headerlink" title="Basic"></a><a target="_blank" rel="noopener" href="https://louiszhai.github.io/2017/09/30/tmux/#%E4%BF%AE%E6%94%B9%E6%8C%87%E4%BB%A4%E5%89%8D%E7%BC%80">Basic</a></h3><ul>
+<li>查看快捷键：<code>&lt;prefix&gt; + ?</code></li>
+<li>窗口重命名：<code>&lt;prefix&gt; + $</code></li>
+<li>窗格重命名：<code>&lt;prefix&gt; + ,</code></li>
+<li>调整窗格的分布位置：<code>&lt;prefix&gt; + &lt;C-o&gt;</code></li>
+<li>将水平分割转换为垂直分割： <code>&lt;prefix&gt; + &lt;space&gt;</code></li>
+<li>将窗格独立成一个新窗口： <code>&lt;prefix&gt; + !</code></li>
+<li>多窗格同步：<code>&lt;prefix&gt; + :synchronize-panes</code></li>
+</ul>
+<h3 id="Config-1"><a href="#Config-1" class="headerlink" title="Config"></a><a target="_blank" rel="noopener" href="https://geekdaxue.co/read/tao-of-tmux-CN/manuscript-09-status-bar.md">Config</a></h3><ul>
+<li>重新载入当前配置： <code>tmux source ~/.tmux.conf</code></li>
+</ul>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16763983/article/details/130450323">多屏幕打开同一个tmux会产生分辨率冲突的问题</a>：<ul>
+<li>在配置文件中加入 <code>set-window-option -g aggressive-resize</code></li>
+<li>选择最小分辨率：<code>&lt;prefix&gt; + D</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="svn"><a href="#svn" class="headerlink" title="svn"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoenet/article/details/122292970">svn</a></h2><ol>
+<li><p>显示库信息： <code>svn info</code></p>
+</li>
+<li><p>文件改动状态： <code>svn st</code>  仅显示当前路径： <code>svn st -N</code></p>
+</li>
+<li><p>比较本地与库中的文件： <code>svn diff &lt;file&gt; or &lt;dir&gt;</code></p>
+</li>
+<li><p>提交本地文件到库： <code>svn ci [-m &quot;text&quot;] &lt;localfile&gt;</code></p>
+</li>
+<li><p>创建的新文件并提交到库： <code>svn add &lt;localfile&gt; or &lt;localpath&gt;</code> → <code>svn ci -m &quot;text&quot; &lt;localfile&gt; or &lt;localpath&gt;</code></p>
+</li>
+<li><p>将库文件下载到本地目录： <code>svn co &lt;svn_url&gt; &lt;local_path&gt;</code></p>
+</li>
+<li><p>更新到最新版本： <code>svn up &lt;file or dir&gt; [-t xx]</code></p>
+<ol>
+<li>svn操作文件缩写： <code>U</code> 从服务器更新（update）； <code>A</code> 新增文件； <code>D</code> 删除文件； <code>C</code> 冲突；<a target="_blank" rel="noopener" href="https://blog.csdn.net/FlyingKuiKui/article/details/80423035">https://blog.csdn.net/FlyingKuiKui/article/details/80423035</a></li>
+<li>当存在冲突时： <code>tc</code> 以库文件为准； <code>mc</code> 以本地文件为准； <code>p</code> 标记冲突，稍后解决； <a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaoshaoyan123/article/details/125394784">https://blog.csdn.net/zhaoshaoyan123/article/details/125394784</a></li>
+<li>解决冲突后，需要标记冲突已解决： <code>svn resolve --accept=working &lt;filename&gt;</code> <code>svn resolved &lt;filename&gt;</code> 会删除因冲突而创建的相关文件</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/raoxiaoya/article/details/107963301">https://blog.csdn.net/raoxiaoya/article/details/107963301</a></li>
+</ol>
+</li>
+<li><p>删除库中的文件： <code>svn delete &lt;filename&gt;     svn ci -m &quot;delete filename&quot;</code> <a target="_blank" rel="noopener" href="https://blog.csdn.net/Morris_/article/details/108746600">https://blog.csdn.net/Morris_&#x2F;article&#x2F;details&#x2F;108746600</a></p>
+</li>
+<li><p>查看修改历史： <code>svn log &lt;dir&gt; [-v]</code></p>
+</li>
+</ol>
+<h2 id="regex"><a href="#regex" class="headerlink" title="regex"></a>regex</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.org.cn/regexsucha/">正则表达式语法速查|正则教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44273429/article/details/132988625">深入理解Python正则表达式</a></li>
+</ul>
+<h2 id="questasim-or-modelsim"><a href="#questasim-or-modelsim" class="headerlink" title="questasim or modelsim"></a>questasim or modelsim</h2><ul>
+<li><code>vlog -help all</code></li>
+<li><a href="%5Bhttps://blog.csdn.net/Xminyang/article/details/132781868%5D(https://blog.csdn.net/Xminyang/article/details/132781868">ModelSim命令基础教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lin_w_x/article/details/125484206">QuestaSim</a></li>
+</ul>
+<h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h2><h3 id="Basic-6"><a href="#Basic-6" class="headerlink" title="Basic"></a>Basic</h3><ul>
+<li><code>r</code>：重新开始执行程序</li>
+<li><code>c</code>：继续执行程序</li>
+<li><code>s</code>：单步执行且进入函数</li>
+<li><code>n</code>：单步执行但不进入函数</li>
+<li><code>finish</code>：跳出当前函数</li>
+<li><code>p</code>：打印变量或寄存器的值</li>
+<li><code>x</code>：扫描内存</li>
+<li><code>bt</code>：查看调用栈</li>
+<li><code>b</code>：设置断点   <code>b main</code> <code>b 92</code></li>
+<li><code>watch</code>：设置监视点</li>
+<li><code>help xxx</code>：查看<code>xxx</code>命令的帮助</li>
+<li><code>layout src</code>：查看源代码</li>
+<li><code>layout split</code>：查看汇编代码</li>
+<li><code>ctrl + p / n</code>回溯历史命令</li>
+</ul>
+<h3 id="Debug-1"><a href="#Debug-1" class="headerlink" title="Debug"></a>Debug</h3><ul>
+<li>layout模式下容易出现花屏现象，使用 <code>ctrl + l</code> 进行清屏</li>
+</ul>
+<h2 id="cgdb"><a href="#cgdb" class="headerlink" title="cgdb"></a><a target="_blank" rel="noopener" href="https://cgdb.github.io/">cgdb</a></h2><h2 id="pdb"><a href="#pdb" class="headerlink" title="pdb"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43799400/article/details/122582895">pdb</a></h2><h2 id="bsub"><a href="#bsub" class="headerlink" title="bsub"></a>bsub</h2><h3 id="Basic-7"><a href="#Basic-7" class="headerlink" title="Basic"></a>Basic</h3><ul>
+<li><code>busers</code>：查看用户提交的任务的运行、排队情况</li>
+<li><code>bjobs -all &gt; job.log</code>：查看用户正在运行的job记录</li>
+</ul>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-sort.html">sort</a></h2><h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43382735/article/details/121007185">uniq</a></h2><h2 id="pandoc"><a href="#pandoc" class="headerlink" title="pandoc"></a>pandoc</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27464321/article/details/88853270">tex2word</a></li>
+</ol>
+<h2 id="other"><a href="#other" class="headerlink" title="other"></a>other</h2><ol>
+<li><code>gio open xxx.xlsx</code></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io">planckgh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/">https://planckzgh.github.io/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://planckzgh.github.io" target="_blank">planckgh</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E4%BD%9C/">工作</a></div><div class="post-share"><div class="social-share" data-image="/img/bg1.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">🦐 Joplin笔记恢复记录</div></div><div class="info-2"><div class="info-item-1">原因更改了Onedrive本地文件夹路径，导致Joplin同步为空，但本地文件并未丢失。 找回方法 确定现象：打开Joplin，等待软件自动同步，Joplin会因找不到原路径而重新创建一个新路径（我的路径为：Onedrive&#x2F;应用&#x2F;Joplin）注意此处Joplin找不到路径的原因是我们曾经动过Joplin的同步路径，就算我们后来改回了原路径，也算曾经对原路径改动过，Joplin仍然会忽略我们改回的路径，重新创建一个同步路径。那我自己举例：  我将Joplin同步路径（Onedrive&#x2F;应用&#x2F;Joplin）不小心更改为（Onedrive&#x2F;Apps&#x2F;Joplin）。 在上述操作不知情时，我打开Joplin记笔记，Joplin会自动同步，找不到路径重新生成新路径（Onedrive&#x2F;应用&#x2F;Joplin），此时我发现同步笔记数据部分丢失。 于是我删除了Joplin重新创建的新路径（因为新路径的笔记数据不完整），将第一步操作重做（即，重新将Joplin同步路径更改为Onedrive&#x2F;应用&#x2F;J...</div></div></div></a><a class="pagination-related" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img class="cover" src="/img/bg1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">gdb简明教程</div></div><div class="info-2"><div class="info-item-1">make gdb x：扫描内存 b：设置断点 c：继续执行程序 r：重新开始执行程序 s：单步执行且进入函数 n：单步执行但不进入函数 p：打印变量或寄存器的值 bt：查看调用栈 watch：设置监视点 finish：跳出当前函数 layout src：查看源代码 layout split：查看汇编代码 ctrl + p / n：回溯历史命令 help xxx：查看xxx命令的帮助  </div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/Planck.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">planckgh</div><div class="author-info-description">学习记录与分享</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/planckzgh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/planckzgh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:planckgh@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">有任何建议欢迎使用邮件与我联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Tools"><span class="toc-number">1.</span> <span class="toc-text">Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">1.1.</span> <span class="toc-text">vim</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic"><span class="toc-number">1.1.1.</span> <span class="toc-text">Basic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Plugin"><span class="toc-number">1.1.2.</span> <span class="toc-text">Plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Command"><span class="toc-number">1.1.3.</span> <span class="toc-text">Command</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Note"><span class="toc-number">1.1.4.</span> <span class="toc-text">Note</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E4%B8%89%E5%89%91%E5%AE%A2"><span class="toc-number">2.</span> <span class="toc-text">linux三剑客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#grep%EF%BC%9A%E8%BF%87%E6%BB%A4%E6%96%87%E6%9C%AC"><span class="toc-number">2.1.</span> <span class="toc-text">grep：过滤文本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Basic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sed%EF%BC%9A%E4%BF%AE%E6%94%B9%E6%96%87%E6%9C%AC"><span class="toc-number">2.2.</span> <span class="toc-text">sed：修改文本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-2"><span class="toc-number">2.2.1.</span> <span class="toc-text">Basic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#awk%EF%BC%9A%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC"><span class="toc-number">2.3.</span> <span class="toc-text">awk：处理文本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-3"><span class="toc-number">2.3.1.</span> <span class="toc-text">Basic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#verdi"><span class="toc-number">2.4.</span> <span class="toc-text">verdi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-4"><span class="toc-number">2.4.1.</span> <span class="toc-text">Basic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install"><span class="toc-number">2.4.2.</span> <span class="toc-text">Install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config"><span class="toc-number">2.4.3.</span> <span class="toc-text">Config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hotkeys"><span class="toc-number">2.4.4.</span> <span class="toc-text">Hotkeys</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmux"><span class="toc-number">2.5.</span> <span class="toc-text">tmux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-5"><span class="toc-number">2.5.1.</span> <span class="toc-text">Basic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config-1"><span class="toc-number">2.5.2.</span> <span class="toc-text">Config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug"><span class="toc-number">2.5.3.</span> <span class="toc-text">Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#svn"><span class="toc-number">2.6.</span> <span class="toc-text">svn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#regex"><span class="toc-number">2.7.</span> <span class="toc-text">regex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#questasim-or-modelsim"><span class="toc-number">2.8.</span> <span class="toc-text">questasim or modelsim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gdb"><span class="toc-number">2.9.</span> <span class="toc-text">gdb</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-6"><span class="toc-number">2.9.1.</span> <span class="toc-text">Basic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug-1"><span class="toc-number">2.9.2.</span> <span class="toc-text">Debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cgdb"><span class="toc-number">2.10.</span> <span class="toc-text">cgdb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pdb"><span class="toc-number">2.11.</span> <span class="toc-text">pdb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bsub"><span class="toc-number">2.12.</span> <span class="toc-text">bsub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-7"><span class="toc-number">2.12.1.</span> <span class="toc-text">Basic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sort"><span class="toc-number">2.13.</span> <span class="toc-text">sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uniq"><span class="toc-number">2.14.</span> <span class="toc-text">uniq</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandoc"><span class="toc-number">2.15.</span> <span class="toc-text">pandoc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#other"><span class="toc-number">2.16.</span> <span class="toc-text">other</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/%F0%9F%A6%90%20Joplin%E7%AC%94%E8%AE%B0%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95/" title="🦐 Joplin笔记恢复记录">🦐 Joplin笔记恢复记录</a><time datetime="2024-12-10T09:17:03.000Z" title="发表于 2024-12-10 17:17:03">2024-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用工具合集"/></a><div class="content"><a class="title" href="/2024/12/09/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%90%88%E9%9B%86/" title="常用工具合集">常用工具合集</a><time datetime="2024-12-09T09:17:03.000Z" title="发表于 2024-12-09 17:17:03">2024-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gdb简明教程"/></a><div class="content"><a class="title" href="/2024/08/06/gdb%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="gdb简明教程">gdb简明教程</a><time datetime="2024-08-06T06:18:12.000Z" title="发表于 2024-08-06 14:18:12">2024-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字IC试题"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%95%B0%E5%AD%97IC%E8%AF%95%E9%A2%98/" title="数字IC试题">数字IC试题</a><time datetime="2024-07-29T16:18:39.000Z" title="发表于 2024-07-30 00:18:39">2024-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路"><img src="/img/bg1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无毛刺时钟切换电路"/></a><div class="content"><a class="title" href="/2024/07/30/%E6%97%A0%E6%AF%9B%E5%88%BA%E6%97%B6%E9%92%9F%E5%88%87%E6%8D%A2%E7%94%B5%E8%B7%AF/" title="无毛刺时钟切换电路">无毛刺时钟切换电路</a><time datetime="2024-07-29T16:10:00.000Z" title="发表于 2024-07-30 00:10:00">2024-07-30</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By planckgh</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liiVokjVZA445OdC',
+      clientSecret: '046cbec5f91693430645dd360b7321d5057462e1',
+      repo: 'planckzgh.github.io',
+      owner: 'planckzgh',
+      admin: ['planckzgh'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '34043e4d419b2dcaabb2f547f2fb8705'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
